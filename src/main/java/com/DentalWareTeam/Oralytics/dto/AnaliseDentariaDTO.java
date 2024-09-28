@@ -1,30 +1,13 @@
-package com.DentalWareTeam.Oralytics.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+package com.DentalWareTeam.Oralytics.dto;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "TB_ANALISE_DENTARIA")
-public class AnaliseDentaria {
+public class AnaliseDentariaDTO {
 
-    @Id
     private int id;
     private int id_usuario;
     private LocalDate data_analise;
     private double probalidade_problema;
-
-    public AnaliseDentaria() {
-    }
-
-    public AnaliseDentaria(int id, int id_usuario, LocalDate data_analise, double probalidade_problema) {
-        this.id = id;
-        this.id_usuario = id_usuario;
-        this.data_analise = data_analise;
-        this.probalidade_problema = probalidade_problema;
-    }
 
     public int getId() {
         return id;

@@ -1,9 +1,15 @@
 package com.DentalWareTeam.Oralytics.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TB_PROCEDIMENTO_DENTARIO")
 public class ProcedimentoDentario {
 
+    @Id
     private int id;
-
     private String procedimento;
 
     public ProcedimentoDentario() {

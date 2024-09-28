@@ -1,28 +1,11 @@
-package com.DentalWareTeam.Oralytics.model;
+package com.DentalWareTeam.Oralytics.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class DadosMonitoramentoDTO {
 
-@Entity
-@Table(name = "TB_DADO_MONITORAMENTO")
-public class DadoMonitoramento {
-
-    @Id
     private int id;
     private int id_usuario;
     private int id_relato_problema_dentario;
     private int data_registro;
-
-    public DadoMonitoramento() {
-    }
-
-    public DadoMonitoramento(int id, int id_usuario, int id_relato_problema_dentario, int data_registro) {
-        this.id = id;
-        this.id_usuario = id_usuario;
-        this.id_relato_problema_dentario = id_relato_problema_dentario;
-        this.data_registro = data_registro;
-    }
 
     public int getId() {
         return id;

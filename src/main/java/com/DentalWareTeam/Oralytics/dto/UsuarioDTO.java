@@ -1,30 +1,12 @@
-package com.DentalWareTeam.Oralytics.model;
+package com.DentalWareTeam.Oralytics.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class UsuarioDTO {
 
-@Entity
-@Table(name = "TB_USUARIO")
-public class Usuario {
-
-    @Id
     private int id;
     private String name;
     private String email;
     private String senha;
     private char genero;
-
-    public Usuario() {
-    }
-
-    public Usuario(int id, String name, String email, String senha, char genero) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.senha = senha;
-        this.genero = genero;
-    }
 
     public int getId() {
         return id;

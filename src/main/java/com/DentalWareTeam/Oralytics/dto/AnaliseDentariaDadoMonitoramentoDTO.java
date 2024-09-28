@@ -1,22 +1,9 @@
-package com.DentalWareTeam.Oralytics.model;
+package com.DentalWareTeam.Oralytics.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "TB_ANALISE_DENTARIA_DADO_MONITORAMENTO")
-public class AnaliseDentariaDadoMonitoramento {
+public class AnaliseDentariaDadoMonitoramentoDTO {
 
     private int id_analise_dentaria;
     private int id_dado_monitoramento;
-
-    public AnaliseDentariaDadoMonitoramento() {
-    }
-
-    public AnaliseDentariaDadoMonitoramento(int id_analise_dentaria, int id_dado_monitoramento) {
-        this.id_analise_dentaria = id_analise_dentaria;
-        this.id_dado_monitoramento = id_dado_monitoramento;
-    }
 
     public int getId_analise_dentaria() {
         return id_analise_dentaria;
