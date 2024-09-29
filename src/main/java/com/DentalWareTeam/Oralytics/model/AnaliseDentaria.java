@@ -1,8 +1,6 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -11,22 +9,25 @@ import java.time.LocalDate;
 public class AnaliseDentaria {
 
     @Id
-    private int id;
-    private int id_usuario;
-    private LocalDate data_analise;
-    private double probalidade_problema;
+    private Integer id;
+
+
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+    private LocalDate dataAnalise;
+    private double probabilidadeProblema;
 
     public AnaliseDentaria() {
     }
 
-    public AnaliseDentaria(int id, int id_usuario, LocalDate data_analise, double probalidade_problema) {
+    public AnaliseDentaria(Integer id, Usuario usuario, LocalDate dataAnalise, double probabilidadeProblema) {
         this.id = id;
-        this.id_usuario = id_usuario;
-        this.data_analise = data_analise;
-        this.probalidade_problema = probalidade_problema;
+        this.usuario = usuario;
+        this.dataAnalise = dataAnalise;
+        this.probabilidadeProblema = probabilidadeProblema;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -34,27 +35,27 @@ public class AnaliseDentaria {
         this.id = id;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public LocalDate getData_analise() {
-        return data_analise;
+    public LocalDate getDataAnalise() {
+        return dataAnalise;
     }
 
-    public void setData_analise(LocalDate data_analise) {
-        this.data_analise = data_analise;
+    public void setDataAnalise(LocalDate dataAnalise) {
+        this.dataAnalise = dataAnalise;
     }
 
-    public double getProbalidade_problema() {
-        return probalidade_problema;
+    public double getProbabilidadeProblema() {
+        return probabilidadeProblema;
     }
 
-    public void setProbalidade_problema(double probalidade_problema) {
-        this.probalidade_problema = probalidade_problema;
+    public void setProbabilidadeProblema(double probabilidadeProblema) {
+        this.probabilidadeProblema = probabilidadeProblema;
     }
 }

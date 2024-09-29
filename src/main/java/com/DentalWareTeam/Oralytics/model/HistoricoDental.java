@@ -11,60 +11,60 @@ import java.time.LocalDate;
 public class HistoricoDental {
 
     @Id
-    private int id;
-    private int id_procedimento_dentario;
-    private int id_usuario;
-    private LocalDate data_consulta;
-    private String condicao_dente;
+    private Integer id;
+    private ProcedimentoDentario procedimentoDentario;
+    private Usuario usuario;
+    private LocalDate dataConsulta;
+    private String condicaoDente;
 
     public HistoricoDental() {
     }
 
-    public HistoricoDental(int id, int id_procedimento_dentario, int id_usuario, LocalDate data_consulta, String condicao_dente) {
+    public HistoricoDental(Integer id, ProcedimentoDentario procedimentoDentario, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
         this.id = id;
-        this.id_procedimento_dentario = id_procedimento_dentario;
-        this.id_usuario = id_usuario;
-        this.data_consulta = data_consulta;
-        this.condicao_dente = condicao_dente;
+        this.procedimentoDentario = procedimentoDentario;
+        this.usuario = usuario;
+        this.dataConsulta = dataConsulta;
+        this.condicaoDente = condicaoDente;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_procedimento_dentario() {
-        return id_procedimento_dentario;
+    public ProcedimentoDentario getProcedimentoDentario() {
+        return procedimentoDentario;
     }
 
-    public void setId_procedimento_dentario(int id_procedimento_dentario) {
-        this.id_procedimento_dentario = id_procedimento_dentario;
+    public void setProcedimentoDentario(ProcedimentoDentario procedimentoDentario) {
+        this.procedimentoDentario = procedimentoDentario;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public LocalDate getData_consulta() {
-        return data_consulta;
+    public LocalDate getDataConsulta() {
+        return dataConsulta;
     }
 
-    public void setData_consulta(LocalDate data_consulta) {
-        this.data_consulta = data_consulta;
+    public void setDataConsulta(LocalDate dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 
-    public String getCondicao_dente() {
-        return condicao_dente;
+    public String getCondicaoDente() {
+        return condicaoDente;
     }
 
-    public void setCondicao_dente(String condicao_dente) {
-        this.condicao_dente = condicao_dente;
+    public void setCondicaoDente(String condicaoDente) {
+        this.condicaoDente = condicaoDente;
     }
 }

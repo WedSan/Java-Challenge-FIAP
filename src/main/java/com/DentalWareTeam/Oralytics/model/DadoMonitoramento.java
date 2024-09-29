@@ -9,50 +9,50 @@ import jakarta.persistence.Table;
 public class DadoMonitoramento {
 
     @Id
-    private int id;
-    private int id_usuario;
-    private int id_relato_problema_dentario;
-    private int data_registro;
+    private Integer id;
+    private Usuario usuario;
+    private RelatoProblemaDentario relatoProblemaDentario;
+    private int dataRegistro;
 
     public DadoMonitoramento() {
     }
 
-    public DadoMonitoramento(int id, int id_usuario, int id_relato_problema_dentario, int data_registro) {
+    public DadoMonitoramento(Integer id, Usuario usuario, RelatoProblemaDentario relatoProblemaDentario, int dataRegistro) {
         this.id = id;
-        this.id_usuario = id_usuario;
-        this.id_relato_problema_dentario = id_relato_problema_dentario;
-        this.data_registro = data_registro;
+        this.usuario = usuario;
+        this.relatoProblemaDentario = relatoProblemaDentario;
+        this.dataRegistro = dataRegistro;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getId_relato_problema_dentario() {
-        return id_relato_problema_dentario;
+    public RelatoProblemaDentario getRelatoProblemaDentario() {
+        return relatoProblemaDentario;
     }
 
-    public void setId_relato_problema_dentario(int id_relato_problema_dentario) {
-        this.id_relato_problema_dentario = id_relato_problema_dentario;
+    public void setRelatoProblemaDentario(RelatoProblemaDentario relatoProblemaDentario) {
+        this.relatoProblemaDentario = relatoProblemaDentario;
     }
 
-    public int getData_registro() {
-        return data_registro;
+    public int getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setData_registro(int data_registro) {
-        this.data_registro = data_registro;
+    public void setDataRegistro(int dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 }

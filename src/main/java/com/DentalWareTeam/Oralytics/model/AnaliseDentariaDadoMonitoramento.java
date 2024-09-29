@@ -7,30 +7,30 @@ import jakarta.persistence.Table;
 @Table(name = "TB_ANALISE_DENTARIA_DADO_MONITORAMENTO")
 public class AnaliseDentariaDadoMonitoramento {
 
-    private int id_analise_dentaria;
-    private int id_dado_monitoramento;
+    private AnaliseDentaria analiseDentaria;
+    private DadoMonitoramento dadoMonitoramento;
 
     public AnaliseDentariaDadoMonitoramento() {
     }
 
-    public AnaliseDentariaDadoMonitoramento(int id_analise_dentaria, int id_dado_monitoramento) {
-        this.id_analise_dentaria = id_analise_dentaria;
-        this.id_dado_monitoramento = id_dado_monitoramento;
+    public AnaliseDentariaDadoMonitoramento(AnaliseDentaria analiseDentaria, DadoMonitoramento dadoMonitoramento) {
+        this.analiseDentaria = analiseDentaria;
+        this.dadoMonitoramento = dadoMonitoramento;
     }
 
-    public int getId_analise_dentaria() {
-        return id_analise_dentaria;
+    public AnaliseDentaria getAnaliseDentaria() {
+        return analiseDentaria;
     }
 
-    public void setId_analise_dentaria(int id_analise_dentaria) {
-        this.id_analise_dentaria = id_analise_dentaria;
+    public void setAnaliseDentaria(AnaliseDentaria analiseDentaria) {
+        this.analiseDentaria = analiseDentaria;
     }
 
-    public int getId_dado_monitoramento() {
-        return id_dado_monitoramento;
+    public DadoMonitoramento getDadoMonitoramento() {
+        return dadoMonitoramento;
     }
 
-    public void setId_dado_monitoramento(int id_dado_monitoramento) {
-        this.id_dado_monitoramento = id_dado_monitoramento;
+    public void setDadoMonitoramento(DadoMonitoramento dadoMonitoramento) {
+        this.dadoMonitoramento = dadoMonitoramento;
     }
 }

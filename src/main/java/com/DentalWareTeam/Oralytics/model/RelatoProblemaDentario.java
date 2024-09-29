@@ -9,22 +9,22 @@ import jakarta.persistence.Table;
 public class RelatoProblemaDentario {
 
     @Id
-    private int id;
+    private Integer id;
     private String problema;
 
     public RelatoProblemaDentario() {
     }
 
-    public RelatoProblemaDentario(int id, String problema) {
+    public RelatoProblemaDentario(Integer id, String problema) {
         this.id = id;
         this.problema = problema;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -9,22 +9,22 @@ import jakarta.persistence.Table;
 public class ProcedimentoDentario {
 
     @Id
-    private int id;
+    private Integer id;
     private String procedimento;
 
     public ProcedimentoDentario() {
     }
 
-    public ProcedimentoDentario(int id, String procedimento) {
+    public ProcedimentoDentario(Integer id, String procedimento) {
         this.id = id;
         this.procedimento = procedimento;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
