@@ -1,6 +1,8 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_RELATO_PROBLEMA_DENTARIO")
@@ -9,6 +11,9 @@ public class RelatoProblemaDentario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @NotNull
+    @Max(30)
     private String problema;
 
     public RelatoProblemaDentario() {

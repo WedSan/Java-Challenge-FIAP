@@ -1,6 +1,7 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,11 +16,14 @@ public class DadoMonitoramento {
 
     @JoinColumn(name = "id_usuario")
     @ManyToOne
+    @NotNull
     private Usuario usuario;
 
     @JoinColumn(name = "id_relato_problema_dentario")
     @OneToMany
     private Set<RelatoProblemaDentario> relatosProblemasDentarios = new HashSet<>();
+
+    @NotNull
     private int dataRegistro;
 
     public DadoMonitoramento() {

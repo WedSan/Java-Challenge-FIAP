@@ -1,6 +1,9 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "TB_USUARIO")
@@ -9,9 +12,21 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @NotNull
+    @Max(120)
     private String name;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
+    @Max(255)
     private String senha;
+
+    @NotNull
+    @Max(1)
     private char genero;
 
     public Usuario() {
