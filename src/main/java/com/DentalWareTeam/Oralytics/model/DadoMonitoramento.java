@@ -2,6 +2,9 @@ package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "TB_DADO_MONITORAMENTO")
 public class DadoMonitoramento {
@@ -16,16 +19,16 @@ public class DadoMonitoramento {
 
     @JoinColumn(name = "id_relato_problema_dentario")
     @OneToMany
-    private RelatoProblemaDentario relatoProblemaDentario;
+    private Set<RelatoProblemaDentario> relatosProblemasDentarios = new HashSet<>();
     private int dataRegistro;
 
     public DadoMonitoramento() {
     }
 
-    public DadoMonitoramento(Integer id, Usuario usuario, RelatoProblemaDentario relatoProblemaDentario, int dataRegistro) {
+    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, int dataRegistro) {
         this.id = id;
         this.usuario = usuario;
-        this.relatoProblemaDentario = relatoProblemaDentario;
+        this.relatosProblemasDentarios = relatosProblemasDentarios;
         this.dataRegistro = dataRegistro;
     }
 
@@ -45,12 +48,12 @@ public class DadoMonitoramento {
         this.usuario = usuario;
     }
 
-    public RelatoProblemaDentario getRelatoProblemaDentario() {
-        return relatoProblemaDentario;
+    public Set<RelatoProblemaDentario> getRelatosProblemasDentarios() {
+        return relatosProblemasDentarios;
     }
 
-    public void setRelatoProblemaDentario(RelatoProblemaDentario relatoProblemaDentario) {
-        this.relatoProblemaDentario = relatoProblemaDentario;
+    public void setRelatosProblemasDentarios(Set<RelatoProblemaDentario> relatosProblemasDentarios) {
+        this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
     public int getDataRegistro() {

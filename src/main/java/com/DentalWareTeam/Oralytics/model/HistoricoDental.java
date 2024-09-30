@@ -3,6 +3,7 @@ package com.DentalWareTeam.Oralytics.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_HISTORICO_DENTAL")
@@ -14,7 +15,7 @@ public class HistoricoDental {
 
     @JoinColumn(name = "id_procedimento_dentario")
     @OneToMany
-    private ProcedimentoDentario procedimentoDentario;
+    private Set<ProcedimentoDentario> procedimentosDentarios;
 
     @JoinColumn(name = "id_usuario)")
     @ManyToOne
@@ -25,9 +26,9 @@ public class HistoricoDental {
     public HistoricoDental() {
     }
 
-    public HistoricoDental(Integer id, ProcedimentoDentario procedimentoDentario, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
+    public HistoricoDental(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
         this.id = id;
-        this.procedimentoDentario = procedimentoDentario;
+        this.procedimentosDentarios = procedimentosDentarios;
         this.usuario = usuario;
         this.dataConsulta = dataConsulta;
         this.condicaoDente = condicaoDente;
@@ -41,12 +42,12 @@ public class HistoricoDental {
         this.id = id;
     }
 
-    public ProcedimentoDentario getProcedimentoDentario() {
-        return procedimentoDentario;
+    public Set<ProcedimentoDentario> getProcedimentosDentarios() {
+        return procedimentosDentarios;
     }
 
-    public void setProcedimentoDentario(ProcedimentoDentario procedimentoDentario) {
-        this.procedimentoDentario = procedimentoDentario;
+    public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
+        this.procedimentosDentarios = procedimentosDentarios;
     }
 
     public Usuario getUsuario() {
