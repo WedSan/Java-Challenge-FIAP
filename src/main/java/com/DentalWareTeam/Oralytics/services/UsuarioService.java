@@ -1,6 +1,7 @@
 package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
+import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -19,7 +20,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario saveUsuario (UsuarioDTO usuarioDTO) {
+    public Usuario salvarUsuario (UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setName(usuarioDTO.getName());
         usuario.setEmail(usuarioDTO.getEmail());
@@ -30,11 +31,14 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void deleteUsuario (Integer id) {
+    public void deletarUsuario (Integer id) throws UsuarioNotFoundException {
+        if (!usuarioRepository.existsById(id)){
+           throw new UsuarioNotFoundException("Usuário não encontrado com o ID: " + id);
+        }
         usuarioRepository.deleteById(id);
     }
 
-    public Usuario getUsuario (Integer id) {
+    public Usuario lerUsuario (Integer id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             return usuario.get();
