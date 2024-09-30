@@ -1,16 +1,21 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_DADO_MONITORAMENTO")
 public class DadoMonitoramento {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @JoinColumn(name = "id_usuario")
+    @ManyToOne
     private Usuario usuario;
+
+    @JoinColumn(name = "id_relato_problema_dentario")
+    @OneToMany
     private RelatoProblemaDentario relatoProblemaDentario;
     private int dataRegistro;
 

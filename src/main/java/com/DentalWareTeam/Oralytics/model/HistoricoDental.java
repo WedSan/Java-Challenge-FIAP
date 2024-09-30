@@ -1,8 +1,6 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -11,8 +9,15 @@ import java.time.LocalDate;
 public class HistoricoDental {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @JoinColumn(name = "id_procedimento_dentario")
+    @OneToMany
     private ProcedimentoDentario procedimentoDentario;
+
+    @JoinColumn(name = "id_usuario)")
+    @ManyToOne
     private Usuario usuario;
     private LocalDate dataConsulta;
     private String condicaoDente;

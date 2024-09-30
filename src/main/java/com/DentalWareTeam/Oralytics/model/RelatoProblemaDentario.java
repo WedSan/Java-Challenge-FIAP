@@ -1,14 +1,13 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TB_RELATO_PROBLEMA_DENTARIO")
 public class RelatoProblemaDentario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String problema;
 

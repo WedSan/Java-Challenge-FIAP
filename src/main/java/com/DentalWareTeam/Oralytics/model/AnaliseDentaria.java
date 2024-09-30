@@ -9,10 +9,12 @@ import java.time.LocalDate;
 public class AnaliseDentaria {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
 
     @JoinColumn(name = "id_usuario")
+    @ManyToOne
     private Usuario usuario;
     private LocalDate dataAnalise;
     private double probabilidadeProblema;
