@@ -3,6 +3,7 @@ package com.DentalWareTeam.Oralytics.dto;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 public class HistoricoDentalDTO {
@@ -10,12 +11,12 @@ public class HistoricoDentalDTO {
     private Integer id;
     private Integer idProcedimentoDentario;
     private Integer idUsuario;
-    private LocalDate dataConsulta;
+    private Date dataConsulta;
     private String condicaoDente;
 
     private Set<ProcedimentoDentarioDTO> procedimentosDentarios;
 
-    public HistoricoDentalDTO(Integer id, Integer idProcedimentoDentario, Integer idUsuario, LocalDate dataConsulta, String condicaoDente, Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
+    public HistoricoDentalDTO(Integer id, Integer idProcedimentoDentario, Integer idUsuario, Date dataConsulta, String condicaoDente, Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
         this.id = id;
         this.idProcedimentoDentario = idProcedimentoDentario;
         this.idUsuario = idUsuario;
@@ -52,11 +53,11 @@ public class HistoricoDentalDTO {
         this.idUsuario = idUsuario;
     }
 
-    public LocalDate getDataConsulta() {
+    public Date getDataConsulta() {
         return dataConsulta;
     }
 
-    public void setDataConsulta(LocalDate dataConsulta) {
+    public void setDataConsulta(Date dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 
