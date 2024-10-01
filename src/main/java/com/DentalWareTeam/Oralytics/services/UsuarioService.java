@@ -38,15 +38,25 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public Usuario lerUsuario (Integer id) {
+    public Usuario lerUsuario (Integer id) throws UsuarioNotFoundException {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
             return usuario.get();
         } else {
-            throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
+            throw new UsuarioNotFoundException("Usuário não encontrado com ID: " + id);
         }
-
     }
 
+    @Transactional
+    public void atualizarEmail (Integer id, String email) throws UsuarioNotFoundException {
+        Usuario usuario = lerUsuario(id);
+        usuario.setEmail(email);
+    }
+
+    @Transactional
+    public void atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
+        Usuario usuario = lerUsuario(id);
+        usuario.setSenha(senha);
+    }
 
 }
