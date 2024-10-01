@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_ANALISE_DENTARIA")
@@ -21,16 +22,17 @@ public class AnaliseDentaria {
     private Usuario usuario;
 
     @NotNull
-    private LocalDate dataAnalise;
+    private Date dataAnalise;
 
     @NotNull
     @Max(5)
     private double probabilidadeProblema;
 
+
     public AnaliseDentaria() {
     }
 
-    public AnaliseDentaria(Integer id, Usuario usuario, LocalDate dataAnalise, double probabilidadeProblema) {
+    public AnaliseDentaria(Integer id, Usuario usuario, Date dataAnalise, double probabilidadeProblema) {
         this.id = id;
         this.usuario = usuario;
         this.dataAnalise = dataAnalise;
@@ -41,31 +43,33 @@ public class AnaliseDentaria {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public @NotNull Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(@NotNull Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public LocalDate getDataAnalise() {
+    public @NotNull Date getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(LocalDate dataAnalise) {
+    public void setDataAnalise(@NotNull Date dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 
+    @NotNull
+    @Max(5)
     public double getProbabilidadeProblema() {
         return probabilidadeProblema;
     }
 
-    public void setProbabilidadeProblema(double probabilidadeProblema) {
+    public void setProbabilidadeProblema(@NotNull @Max(5) double probabilidadeProblema) {
         this.probabilidadeProblema = probabilidadeProblema;
     }
 }
