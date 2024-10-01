@@ -3,6 +3,7 @@ package com.DentalWareTeam.Oralytics.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,16 +21,16 @@ public class DadoMonitoramento {
     private Usuario usuario;
 
     @JoinColumn(name = "id_relato_problema_dentario")
-    @OneToMany
-    private Set<RelatoProblemaDentario> relatosProblemasDentarios = new HashSet<>();
+    @ManyToOne
+    private Set<RelatoProblemaDentario> relatosProblemasDentarios;
 
     @NotNull
-    private int dataRegistro;
+    private Date dataRegistro;
 
     public DadoMonitoramento() {
     }
 
-    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, int dataRegistro) {
+    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, Date dataRegistro) {
         this.id = id;
         this.usuario = usuario;
         this.relatosProblemasDentarios = relatosProblemasDentarios;
@@ -44,11 +45,11 @@ public class DadoMonitoramento {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public @NotNull Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(@NotNull Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -60,11 +61,11 @@ public class DadoMonitoramento {
         this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
-    public int getDataRegistro() {
+    public @NotNull Date getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(int dataRegistro) {
+    public void setDataRegistro(@NotNull Date dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 }
