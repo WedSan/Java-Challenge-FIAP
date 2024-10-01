@@ -2,14 +2,23 @@ package com.DentalWareTeam.Oralytics.dto;
 
 public class ProcedimentoDentarioDTO {
 
-    private int id;
+    private Integer id;
     private String procedimento;
 
-    public int getId() {
+    public ProcedimentoDentarioDTO() {
+
+    }
+
+    public ProcedimentoDentarioDTO(Integer id, String procedimento) {
+        this.id = id;
+        this.procedimento = procedimento;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
