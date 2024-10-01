@@ -1,41 +1,54 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import java.util.Date;
+
 public class DadosMonitoramentoDTO {
 
-    private int id;
-    private int id_usuario;
-    private int id_relato_problema_dentario;
-    private int data_registro;
+    private Integer id;
+    private Integer idUsuario;
+    private Integer idRelatoProblemaDentario;
+    private Date dataRegistro;
 
-    public int getId() {
+    public DadosMonitoramentoDTO() {
+
+    }
+
+    public DadosMonitoramentoDTO(Integer id, Integer idUsuario, Integer idRelatoProblemaDentario, Date dataRegistro) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idRelatoProblemaDentario = idRelatoProblemaDentario;
+        this.dataRegistro = dataRegistro;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public int getId_relato_problema_dentario() {
-        return id_relato_problema_dentario;
+    public Integer getIdRelatoProblemaDentario() {
+        return idRelatoProblemaDentario;
     }
 
-    public void setId_relato_problema_dentario(int id_relato_problema_dentario) {
-        this.id_relato_problema_dentario = id_relato_problema_dentario;
+    public void setIdRelatoProblemaDentario(Integer idRelatoProblemaDentario) {
+        this.idRelatoProblemaDentario = idRelatoProblemaDentario;
     }
 
-    public int getData_registro() {
-        return data_registro;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setData_registro(int data_registro) {
-        this.data_registro = data_registro;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 }
