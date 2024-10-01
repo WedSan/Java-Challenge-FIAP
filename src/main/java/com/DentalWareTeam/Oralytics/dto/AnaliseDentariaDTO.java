@@ -1,43 +1,55 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class AnaliseDentariaDTO {
 
-    private int id;
-    private int id_usuario;
-    private LocalDate data_analise;
-    private double probalidade_problema;
+    private Integer id;
+    private Integer idUsuario;
+    private Date dataAnalise;
+    private Double probalidadeProblema;
 
-    public int getId() {
+    public AnaliseDentariaDTO() {
+
+    }
+
+    public AnaliseDentariaDTO(Integer id, Integer idUsuario, Date dataAnalise, Double probalidadeProblema) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.dataAnalise = dataAnalise;
+        this.probalidadeProblema = probalidadeProblema;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public LocalDate getData_analise() {
-        return data_analise;
+    public Date getDataAnalise() {
+        return dataAnalise;
     }
 
-    public void setData_analise(LocalDate data_analise) {
-        this.data_analise = data_analise;
+    public void setDataAnalise(Date dataAnalise) {
+        this.dataAnalise = dataAnalise;
     }
 
-    public double getProbalidade_problema() {
-        return probalidade_problema;
+    public Double getProbalidadeProblema() {
+        return probalidadeProblema;
     }
 
-    public void setProbalidade_problema(double probalidade_problema) {
-        this.probalidade_problema = probalidade_problema;
+    public void setProbalidadeProblema(Double probalidadeProblema) {
+        this.probalidadeProblema = probalidadeProblema;
     }
 }
