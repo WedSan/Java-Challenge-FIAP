@@ -7,14 +7,14 @@ public class AnaliseDentariaDTO {
 
     private Integer id;
     private Integer idUsuario;
-    private Date dataAnalise;
+    private LocalDate dataAnalise;
     private Double probalidadeProblema;
 
     public AnaliseDentariaDTO() {
 
     }
 
-    public AnaliseDentariaDTO(Integer id, Integer idUsuario, Date dataAnalise, Double probalidadeProblema) {
+    public AnaliseDentariaDTO(Integer id, Integer idUsuario, LocalDate dataAnalise, Double probalidadeProblema) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.dataAnalise = dataAnalise;
@@ -37,11 +37,11 @@ public class AnaliseDentariaDTO {
         this.idUsuario = idUsuario;
     }
 
-    public Date getDataAnalise() {
+    public LocalDate getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(Date dataAnalise) {
+    public void setDataAnalise(LocalDate dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 

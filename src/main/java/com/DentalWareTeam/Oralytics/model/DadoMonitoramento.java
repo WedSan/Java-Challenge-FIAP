@@ -3,6 +3,7 @@ package com.DentalWareTeam.Oralytics.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,12 +26,12 @@ public class DadoMonitoramento {
     private Set<RelatoProblemaDentario> relatosProblemasDentarios;
 
     @NotNull
-    private Date dataRegistro;
+    private LocalDate dataRegistro;
 
     public DadoMonitoramento() {
     }
 
-    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, Date dataRegistro) {
+    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, LocalDate dataRegistro) {
         this.id = id;
         this.usuario = usuario;
         this.relatosProblemasDentarios = relatosProblemasDentarios;
@@ -61,11 +62,11 @@ public class DadoMonitoramento {
         this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
-    public @NotNull Date getDataRegistro() {
+    public @NotNull LocalDate getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(@NotNull Date dataRegistro) {
+    public void setDataRegistro(@NotNull LocalDate dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 }

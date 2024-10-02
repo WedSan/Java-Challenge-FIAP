@@ -11,12 +11,12 @@ public class HistoricoDentalDTO {
     private Integer id;
     private Integer idProcedimentoDentario;
     private Integer idUsuario;
-    private Date dataConsulta;
+    private LocalDate dataConsulta;
     private String condicaoDente;
 
     private Set<ProcedimentoDentarioDTO> procedimentosDentarios;
 
-    public HistoricoDentalDTO(Integer id, Integer idProcedimentoDentario, Integer idUsuario, Date dataConsulta, String condicaoDente, Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
+    public HistoricoDentalDTO(Integer id, Integer idProcedimentoDentario, Integer idUsuario, LocalDate dataConsulta, String condicaoDente, Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
         this.id = id;
         this.idProcedimentoDentario = idProcedimentoDentario;
         this.idUsuario = idUsuario;
@@ -53,11 +53,11 @@ public class HistoricoDentalDTO {
         this.idUsuario = idUsuario;
     }
 
-    public Date getDataConsulta() {
+    public LocalDate getDataConsulta() {
         return dataConsulta;
     }
 
-    public void setDataConsulta(Date dataConsulta) {
+    public void setDataConsulta(LocalDate dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 

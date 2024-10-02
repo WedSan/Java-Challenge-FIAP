@@ -1,5 +1,6 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class DadosMonitoramentoDTO {
@@ -7,13 +8,13 @@ public class DadosMonitoramentoDTO {
     private Integer id;
     private Integer idUsuario;
     private Integer idRelatoProblemaDentario;
-    private Date dataRegistro;
+    private LocalDate dataRegistro;
 
     public DadosMonitoramentoDTO() {
 
     }
 
-    public DadosMonitoramentoDTO(Integer id, Integer idUsuario, Integer idRelatoProblemaDentario, Date dataRegistro) {
+    public DadosMonitoramentoDTO(Integer id, Integer idUsuario, Integer idRelatoProblemaDentario, LocalDate dataRegistro) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idRelatoProblemaDentario = idRelatoProblemaDentario;
@@ -44,11 +45,11 @@ public class DadosMonitoramentoDTO {
         this.idRelatoProblemaDentario = idRelatoProblemaDentario;
     }
 
-    public Date getDataRegistro() {
+    public LocalDate getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
+    public void setDataRegistro(LocalDate dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 }

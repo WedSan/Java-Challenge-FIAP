@@ -22,7 +22,7 @@ public class AnaliseDentaria {
     private Usuario usuario;
 
     @NotNull
-    private Date dataAnalise;
+    private LocalDate dataAnalise;
 
     @NotNull
     @Max(5)
@@ -32,7 +32,7 @@ public class AnaliseDentaria {
     public AnaliseDentaria() {
     }
 
-    public AnaliseDentaria(Integer id, Usuario usuario, Date dataAnalise, double probabilidadeProblema) {
+    public AnaliseDentaria(Integer id, Usuario usuario, LocalDate dataAnalise, double probabilidadeProblema) {
         this.id = id;
         this.usuario = usuario;
         this.dataAnalise = dataAnalise;
@@ -55,11 +55,11 @@ public class AnaliseDentaria {
         this.usuario = usuario;
     }
 
-    public @NotNull Date getDataAnalise() {
+    public @NotNull LocalDate getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(@NotNull Date dataAnalise) {
+    public void setDataAnalise(@NotNull LocalDate dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 
