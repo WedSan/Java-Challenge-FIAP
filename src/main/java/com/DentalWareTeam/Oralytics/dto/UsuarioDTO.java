@@ -8,6 +8,18 @@ public class UsuarioDTO {
     private String senha;
     private char genero;
 
+    public UsuarioDTO() {
+
+    }
+
+    public UsuarioDTO(int id, String name, String email, String senha, char genero) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.senha = senha;
+        this.genero = genero;
+    }
+
     public int getId() {
         return id;
     }
