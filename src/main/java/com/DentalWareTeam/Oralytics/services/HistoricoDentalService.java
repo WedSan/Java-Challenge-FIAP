@@ -6,6 +6,9 @@ import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.HistoricoDentalRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,30 +18,36 @@ import java.util.stream.Collectors;
 @Service
 public class HistoricoDentalService {
 
+    @Autowired
     private final HistoricoDentalRepository historicoDentalRepository;
-    private final UsuarioService usuarioService;
 
-    public HistoricoDentalService(HistoricoDentalRepository historicoDentalRepository, UsuarioService usuarioService) {
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public HistoricoDentalService(HistoricoDentalRepository historicoDentalRepository, ModelMapper modelMapper) {
         this.historicoDentalRepository = historicoDentalRepository;
-        this.usuarioService = usuarioService;
+        this.modelMapper = modelMapper;
+    }
+
+    private HistoricoDentalDTO convertToDTO(HistoricoDental historicoDental) {
+        return modelMapper.map(historicoDental, HistoricoDentalDTO.class);
+    }
+
+    private HistoricoDental convertToEntity(HistoricoDentalDTO historicoDentalDTO) {
+        return modelMapper.map(historicoDentalDTO, HistoricoDental.class);
     }
 
     @Transactional
-    public HistoricoDental salvarHistoricoDental (HistoricoDentalDTO historicoDentalDTO, Integer usuarioId) {
-        HistoricoDental historicoDental = new HistoricoDental();
-        historicoDental.setDataConsulta(historicoDentalDTO.getDataConsulta());
-        historicoDental.setCondicaoDente(historicoDentalDTO.getCondicaoDente());
-        Usuario usuario = usuarioService.lerUsuario(usuarioId);
-        historicoDental.setUsuario(usuario);
+    public HistoricoDentalDTO salvarHistoricoDental(@Valid HistoricoDentalDTO historicoDentalDTO) {
+        HistoricoDental historicoDental = convertToEntity(historicoDentalDTO);
+        HistoricoDental historicoSalvo = historicoDentalRepository.save(historicoDental);
+        return convertToDTO(historicoSalvo);
+    }
 
-        Set<ProcedimentoDentario> listaProcedimentosDentarios = historicoDental
-                .getProcedimentosDentarios()
-                .stream()
-                .map(pd -> new ProcedimentoDentario(null,
-                        pd.getProcedimento())).collect(Collectors.toSet());
-
-        historicoDental.setProcedimentosDentarios(listaProcedimentosDentarios);
-
-        return historicoDentalRepository.save(historicoDental);
+    public List<HistoricoDentalDTO> listarHistoricoDental() {
+        List<HistoricoDental> historicoDentals = historicoDentalRepository.findAll();
+        return historicoDentals.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
