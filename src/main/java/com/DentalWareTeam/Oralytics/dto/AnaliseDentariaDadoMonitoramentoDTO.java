@@ -2,22 +2,31 @@ package com.DentalWareTeam.Oralytics.dto;
 
 public class AnaliseDentariaDadoMonitoramentoDTO {
 
-    private int id_analise_dentaria;
-    private int id_dado_monitoramento;
+    private int idAnaliseDentaria;
+    private int idDadoMonitoramento;
 
-    public int getId_analise_dentaria() {
-        return id_analise_dentaria;
+    public AnaliseDentariaDadoMonitoramentoDTO() {
+
     }
 
-    public void setId_analise_dentaria(int id_analise_dentaria) {
-        this.id_analise_dentaria = id_analise_dentaria;
+    public AnaliseDentariaDadoMonitoramentoDTO(int idAnaliseDentaria, int idDadoMonitoramento) {
+        this.idAnaliseDentaria = idAnaliseDentaria;
+        this.idDadoMonitoramento = idDadoMonitoramento;
     }
 
-    public int getId_dado_monitoramento() {
-        return id_dado_monitoramento;
+    public int getIdAnaliseDentaria() {
+        return idAnaliseDentaria;
     }
 
-    public void setId_dado_monitoramento(int id_dado_monitoramento) {
-        this.id_dado_monitoramento = id_dado_monitoramento;
+    public void setIdAnaliseDentaria(int idAnaliseDentaria) {
+        this.idAnaliseDentaria = idAnaliseDentaria;
+    }
+
+    public int getIdDadoMonitoramento() {
+        return idDadoMonitoramento;
+    }
+
+    public void setIdDadoMonitoramento(int idDadoMonitoramento) {
+        this.idDadoMonitoramento = idDadoMonitoramento;
     }
 }
