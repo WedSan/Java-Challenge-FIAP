@@ -30,7 +30,7 @@ public class AnaliseDentariaService {
                 .collect(Collectors.toList());
     }
 
-    public AnaliseDentariaDTO salvarAnaliseDentaria(@Valid AnaliseDentariaDTO analiseDentariaDTO) {
+    public AnaliseDentariaDTO salvarAnaliseDentaria(AnaliseDentariaDTO analiseDentariaDTO) {
         AnaliseDentaria analise = convertToEntity(analiseDentariaDTO);
         AnaliseDentaria analiseSalva = analiseDentariaRepository.save(analise);
         return convertToDTO(analiseSalva);

@@ -38,7 +38,7 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioDTO salvarUsuario(@Valid UsuarioDTO usuarioDTO) {
+    public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = convertToEntity(usuarioDTO);
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
         return convertToDTO(usuarioSalvo);

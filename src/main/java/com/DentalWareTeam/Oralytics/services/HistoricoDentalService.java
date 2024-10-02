@@ -38,7 +38,7 @@ public class HistoricoDentalService {
     }
 
     @Transactional
-    public HistoricoDentalDTO salvarHistoricoDental(@Valid HistoricoDentalDTO historicoDentalDTO) {
+    public HistoricoDentalDTO salvarHistoricoDental(HistoricoDentalDTO historicoDentalDTO) {
         HistoricoDental historicoDental = convertToEntity(historicoDentalDTO);
         HistoricoDental historicoSalvo = historicoDentalRepository.save(historicoDental);
         return convertToDTO(historicoSalvo);

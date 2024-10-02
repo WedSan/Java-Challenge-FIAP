@@ -39,7 +39,7 @@ public class DadoMonitoramentoService {
                 .collect(Collectors.toList());
     }
 
-    public DadosMonitoramentoDTO salvarDadoMonitoramento(@Valid DadosMonitoramentoDTO dadosMonitoramentoDTO) {
+    public DadosMonitoramentoDTO salvarDadoMonitoramento(DadosMonitoramentoDTO dadosMonitoramentoDTO) {
         DadoMonitoramento dadoMonitoramento = convertToEntity(dadosMonitoramentoDTO);
         DadoMonitoramento dadoSalvo = dadoMonitoramentoRepository.save(dadoMonitoramento);
         return convertToDTO(dadoSalvo);
