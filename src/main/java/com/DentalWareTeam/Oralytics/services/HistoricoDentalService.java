@@ -1,6 +1,7 @@
 package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
+import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
 import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 import com.DentalWareTeam.Oralytics.model.Usuario;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,5 +51,14 @@ public class HistoricoDentalService {
         return historicoDentals.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public HistoricoDentalDTO lerHistoricoDental (Integer id) throws HistoricoDentalNotFoundException{
+        Optional<HistoricoDental> historicoDental = historicoDentalRepository.findById(id);
+        if (historicoDental.isPresent()) {
+            return convertToDTO(historicoDental.get());
+        }else {
+            throw new HistoricoDentalNotFoundException("Histórico Dental não encontrado com o ID "+ id);
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.AnaliseDentariaDTO;
+import com.DentalWareTeam.Oralytics.exceptions.AnaliseDentariaNotFoundException;
 import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
 import com.DentalWareTeam.Oralytics.repositories.AnaliseDentariaRepository;
 import jakarta.validation.Valid;
@@ -8,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class AnaliseDentariaService {
@@ -28,6 +30,16 @@ public class AnaliseDentariaService {
         return analises.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+    public AnaliseDentariaDTO lerAnaliseDentaria (Integer id) throws AnaliseDentariaNotFoundException{
+        Optional<AnaliseDentaria> analiseDentaria = analiseDentariaRepository.findById(id);
+        if (analiseDentaria.isPresent()){
+            return convertToDTO(analiseDentaria.get());
+        }else {
+            throw new AnaliseDentariaNotFoundException("Análise Dentária não encontrada");
+        }
+
     }
 
     public AnaliseDentariaDTO salvarAnaliseDentaria(AnaliseDentariaDTO analiseDentariaDTO) {
