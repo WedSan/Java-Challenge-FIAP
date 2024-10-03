@@ -52,10 +52,10 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public Usuario lerUsuario (Integer id) throws UsuarioNotFoundException {
+    public UsuarioDTO lerUsuario (Integer id) throws UsuarioNotFoundException {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
-            return usuario.get();
+            return convertToDTO(usuario.get());
         } else {
             throw new UsuarioNotFoundException("Usuário não encontrado com ID: " + id);
         }
@@ -69,15 +69,17 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void atualizarEmail (Integer id, String email) throws UsuarioNotFoundException {
-        Usuario usuario = lerUsuario(id);
+    public UsuarioDTO atualizarEmail (Integer id, String email) throws UsuarioNotFoundException {
+        UsuarioDTO usuario = lerUsuario(id);
         usuario.setEmail(email);
+        return usuario;
     }
 
     @Transactional
-    public void atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
-        Usuario usuario = lerUsuario(id);
+    public UsuarioDTO atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
+        UsuarioDTO usuario = lerUsuario(id);
         usuario.setSenha(senha);
+        return usuario;
     }
 
 }
