@@ -1,8 +1,14 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+
 public class ProcedimentoDentarioDTO {
 
     private Integer id;
+
+    @NotNull
+    @Max(50)
     private String procedimento;
 
     public ProcedimentoDentarioDTO() {

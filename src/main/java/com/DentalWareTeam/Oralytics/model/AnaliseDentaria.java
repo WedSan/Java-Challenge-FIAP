@@ -47,29 +47,27 @@ public class AnaliseDentaria {
         this.id = id;
     }
 
-    public @NotNull Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(@NotNull Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public @NotNull LocalDate getDataAnalise() {
+    public LocalDate getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(@NotNull LocalDate dataAnalise) {
+    public void setDataAnalise(LocalDate dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 
-    @NotNull
-    @Max(5)
     public double getProbabilidadeProblema() {
         return probabilidadeProblema;
     }
 
-    public void setProbabilidadeProblema(@NotNull @Max(5) double probabilidadeProblema) {
+    public void setProbabilidadeProblema(double probabilidadeProblema) {
         this.probabilidadeProblema = probabilidadeProblema;
     }
 }

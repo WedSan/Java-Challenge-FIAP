@@ -1,22 +1,33 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 import java.util.Date;
 
 public class AnaliseDentariaDTO {
 
     private Integer id;
-    private Integer idUsuario;
+
+    @NotNull
+    private Usuario usuario;
+
+    @NotNull
     private LocalDate dataAnalise;
-    private Double probalidadeProblema;
+
+    @NotNull
+    @Max(5)
+    private double probalidadeProblema;
 
     public AnaliseDentariaDTO() {
 
     }
 
-    public AnaliseDentariaDTO(Integer id, Integer idUsuario, LocalDate dataAnalise, Double probalidadeProblema) {
+    public AnaliseDentariaDTO(Integer id, Usuario usuario, LocalDate dataAnalise, double probalidadeProblema) {
         this.id = id;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.dataAnalise = dataAnalise;
         this.probalidadeProblema = probalidadeProblema;
     }
@@ -29,12 +40,16 @@ public class AnaliseDentariaDTO {
         this.id = id;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setProbalidadeProblema(double probalidadeProblema) {
+        this.probalidadeProblema = probalidadeProblema;
     }
 
     public LocalDate getDataAnalise() {

@@ -1,6 +1,9 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,20 +12,23 @@ import java.util.Set;
 public class HistoricoDentalDTO {
 
     private Integer id;
-    private Integer idProcedimentoDentario;
-    private Integer idUsuario;
+    private Set<ProcedimentoDentario> procedimentosDentarios;
+
+    @NotNull
+    private Usuario usuario;
+
+    @NotNull
     private LocalDate dataConsulta;
+
+    @Max(30)
     private String condicaoDente;
 
-    private Set<ProcedimentoDentarioDTO> procedimentosDentarios;
-
-    public HistoricoDentalDTO(Integer id, Integer idProcedimentoDentario, Integer idUsuario, LocalDate dataConsulta, String condicaoDente, Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
+    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
         this.id = id;
-        this.idProcedimentoDentario = idProcedimentoDentario;
-        this.idUsuario = idUsuario;
+        this.procedimentosDentarios = procedimentosDentarios;
+        this.usuario = usuario;
         this.dataConsulta = dataConsulta;
         this.condicaoDente = condicaoDente;
-        this.procedimentosDentarios = procedimentosDentarios;
     }
 
     public HistoricoDentalDTO() {
@@ -37,20 +43,12 @@ public class HistoricoDentalDTO {
         this.id = id;
     }
 
-    public Integer getIdProcedimentoDentario() {
-        return idProcedimentoDentario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdProcedimentoDentario(Integer idProcedimentoDentario) {
-        this.idProcedimentoDentario = idProcedimentoDentario;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public LocalDate getDataConsulta() {
@@ -69,11 +67,11 @@ public class HistoricoDentalDTO {
         this.condicaoDente = condicaoDente;
     }
 
-    public Set<ProcedimentoDentarioDTO> getProcedimentosDentarios() {
+    public Set<ProcedimentoDentario> getProcedimentosDentarios() {
         return procedimentosDentarios;
     }
 
-    public void setProcedimentosDentarios(Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
+    public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
         this.procedimentosDentarios = procedimentosDentarios;
     }
 }
