@@ -27,4 +27,10 @@ public class HistoricoDentalController {
         List<HistoricoDentalDTO> historicos = historicoDentalService.listarHistoricoDental();
         return ResponseEntity.ok(historicos);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<HistoricoDentalDTO> obterHistoricoDental (@PathVariable Integer id) {
+        HistoricoDentalDTO historico = historicoDentalService.lerHistoricoDental(id);
+        return ResponseEntity.ok(historico);
+    }
 }

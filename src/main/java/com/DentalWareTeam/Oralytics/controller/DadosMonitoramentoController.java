@@ -27,4 +27,10 @@ public class DadosMonitoramentoController {
         List <DadosMonitoramentoDTO> dados = dadoMonitoramentoService.listarDadosMonitoramento();
         return ResponseEntity.ok(dados);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosMonitoramentoDTO> obterDadosMonitoramento (@PathVariable Integer id) {
+        DadosMonitoramentoDTO dado = dadoMonitoramentoService.lerDadoMonitoramento(id);
+        return ResponseEntity.ok(dado);
+    }
 }

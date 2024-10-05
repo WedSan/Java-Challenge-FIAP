@@ -28,4 +28,10 @@ public class AnaliseDentariaController {
         List <AnaliseDentariaDTO> analises = analiseDentariaService.listarAnalisesDentarias();
         return ResponseEntity.ok(analises);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AnaliseDentariaDTO> obterAnaliseDentaria (@PathVariable Integer id) {
+        AnaliseDentariaDTO analiseDentaria = analiseDentariaService.lerAnaliseDentaria(id);
+        return ResponseEntity.ok(analiseDentaria);
+    }
 }

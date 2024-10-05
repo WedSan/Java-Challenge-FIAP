@@ -29,6 +29,12 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<UsuarioDTO> obterUsuario (@PathVariable Integer id){
+        UsuarioDTO usuario = usuarioService.lerUsuario(id);
+        return ResponseEntity.ok(usuario);
+    }
+
     @PutMapping("email/{id}")
     public ResponseEntity<UsuarioDTO> atualizarEmail (@PathVariable Integer id, @PathVariable String email){
         UsuarioDTO usuario = usuarioService.atualizarEmail(id, email);
