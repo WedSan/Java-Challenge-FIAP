@@ -11,20 +11,19 @@ import java.util.List;
 public class RelatoProblemaDentario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Max(30)
     private String problema;
 
-    @OneToMany(mappedBy = "relatoProblemaDentario")
-    private List<DadoMonitoramento> dadosMonitoramento;
+    @ManyToOne
+    @JoinColumn(name = "id_dado_monitoramento")
+    private DadoMonitoramento dadosMonitoramento;
 
     public RelatoProblemaDentario() {
     }
 
-    public RelatoProblemaDentario(Integer id, String problema, List<DadoMonitoramento> dadosMonitoramento) {
+    public RelatoProblemaDentario(Integer id, String problema, DadoMonitoramento dadosMonitoramento) {
         this.id = id;
         this.problema = problema;
         this.dadosMonitoramento = dadosMonitoramento;
@@ -46,11 +45,11 @@ public class RelatoProblemaDentario {
         this.problema = problema;
     }
 
-    public List<DadoMonitoramento> getDadosMonitoramento() {
+    public DadoMonitoramento getDadosMonitoramento() {
         return dadosMonitoramento;
     }
 
-    public void setDadosMonitoramento(List<DadoMonitoramento> dadosMonitoramento) {
+    public void setDadosMonitoramento(DadoMonitoramento dadosMonitoramento) {
         this.dadosMonitoramento = dadosMonitoramento;
     }
 }
