@@ -1,10 +1,14 @@
 package com.DentalWareTeam.Oralytics.controller;
 
+import com.DentalWareTeam.Oralytics.dto.AtualizacaoEmailDTO;
+import com.DentalWareTeam.Oralytics.dto.AtualizacaoSenhaDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
+import com.DentalWareTeam.Oralytics.mapper.UsuarioMapper;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +24,7 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<UsuarioDTO> adicionarUsuario (@RequestBody @Valid UsuarioDTO usuarioDTO){
         UsuarioDTO usuario = usuarioService.salvarUsuario(usuarioDTO);
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     @GetMapping
@@ -31,19 +35,25 @@ public class UsuarioController {
 
     @GetMapping("{id}")
     public ResponseEntity<UsuarioDTO> obterUsuario (@PathVariable Integer id){
-        UsuarioDTO usuario = usuarioService.lerUsuario(id);
-        return ResponseEntity.ok(usuario);
+        Usuario usuario = usuarioService.lerUsuario(id);
+        return ResponseEntity.ok(UsuarioMapper.toDTO(usuario));
     }
 
-    @PutMapping("email/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarEmail (@PathVariable Integer id, @PathVariable String email){
-        UsuarioDTO usuario = usuarioService.atualizarEmail(id, email);
-        return ResponseEntity.ok(usuario);
+    @PatchMapping("email/{id}")
+    public ResponseEntity<UsuarioDTO> atualizarEmail(@PathVariable Integer id, @RequestBody AtualizacaoEmailDTO emailDTO){
+        Usuario usuario = usuarioService.atualizarEmail(id, emailDTO.getNovoEmail());
+        return ResponseEntity.ok(UsuarioMapper.toDTO(usuario));
     }
 
-    @PutMapping("senha/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarSenha (@PathVariable Integer id, @PathVariable String email){
-        UsuarioDTO usuario = usuarioService.atualizarSenha(id, email);
-        return ResponseEntity.ok(usuario);
+    @PatchMapping("senha/{id}")
+    public ResponseEntity<UsuarioDTO> atualizarSenha(@PathVariable Integer id, @RequestBody AtualizacaoSenhaDTO senhaDTO){
+        Usuario usuario = usuarioService.atualizarSenha(id, senhaDTO.getNovaSenha());
+        return ResponseEntity.ok(UsuarioMapper.toDTO(usuario));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Integer id){
+        usuarioService.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 }
