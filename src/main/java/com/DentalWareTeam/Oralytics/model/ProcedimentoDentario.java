@@ -11,22 +11,22 @@ import java.util.List;
 public class ProcedimentoDentario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Max(50)
     private String procedimento;
 
-    @OneToMany(mappedBy = "procedimentoDentario")
-    private List<HistoricoDental> historicoDental;
+    @JoinColumn(name = "ID_HISTORICO_DENTAL")
+    @ManyToOne
+    private HistoricoDental historicoDental;
 
     public ProcedimentoDentario() {
     }
 
-    public ProcedimentoDentario(Integer id, String procedimento) {
+    public ProcedimentoDentario(Integer id, String procedimento, HistoricoDental historicoDental) {
         this.id = id;
         this.procedimento = procedimento;
+        this.historicoDental = historicoDental;
     }
 
     public Integer getId() {
@@ -45,11 +45,11 @@ public class ProcedimentoDentario {
         this.procedimento = procedimento;
     }
 
-    public List<HistoricoDental> getHistoricoDental() {
+    public HistoricoDental getHistoricoDental() {
         return historicoDental;
     }
 
-    public void setHistoricoDental(List<HistoricoDental> historicoDental) {
+    public void setHistoricoDental(HistoricoDental historicoDental) {
         this.historicoDental = historicoDental;
     }
 }
