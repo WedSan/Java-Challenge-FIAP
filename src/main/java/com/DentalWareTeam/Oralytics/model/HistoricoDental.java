@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -12,28 +13,24 @@ import java.util.Set;
 public class HistoricoDental {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "id_procedimento_dentario")
-    @OneToMany
+    @OneToMany(mappedBy = "historicoDental", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProcedimentoDentario> procedimentosDentarios;
 
-    @JoinColumn(name = "id_usuario)")
+    @JoinColumn(name = "id_usuario")
     @ManyToOne
-    @NotNull
     private Usuario usuario;
 
-    @NotNull
-    private LocalDate dataConsulta;
+    private LocalDateTime dataConsulta;
 
-    @Max(30)
     private String condicaoDente;
 
     public HistoricoDental() {
     }
 
-    public HistoricoDental(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
+    public HistoricoDental(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDateTime dataConsulta, String condicaoDente) {
         this.id = id;
         this.procedimentosDentarios = procedimentosDentarios;
         this.usuario = usuario;
@@ -54,6 +51,7 @@ public class HistoricoDental {
     }
 
     public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
+        procedimentosDentarios.forEach(e -> e.setHistoricoDental(this));
         this.procedimentosDentarios = procedimentosDentarios;
     }
 
@@ -65,11 +63,11 @@ public class HistoricoDental {
         this.usuario = usuario;
     }
 
-    public LocalDate getDataConsulta() {
+    public LocalDateTime getDataConsulta() {
         return dataConsulta;
     }
 
-    public void setDataConsulta(LocalDate dataConsulta) {
+    public void setDataConsulta(LocalDateTime dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 
