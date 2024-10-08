@@ -1,42 +1,45 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_ANALISE_DENTARIA")
 public class AnaliseDentaria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
     @JoinColumn(name = "id_usuario")
     @ManyToOne
-    @NotNull
     private Usuario usuario;
 
-    @NotNull
-    private LocalDate dataAnalise;
+    private LocalDateTime dataAnalise;
 
     @NotNull
-    @Max(5)
     private double probabilidadeProblema;
+
+    @JoinTable(name = "TB_ANALISE_DENTARIA_DADO_MONITORAMENTO",
+            joinColumns = @JoinColumn(name = "id_analise_dentaria"),
+            inverseJoinColumns = @JoinColumn(name = "id_dado_monitoramento"))
+    @ManyToMany
+    private Set<DadoMonitoramento> dadosMonitoramento;
 
 
     public AnaliseDentaria() {
     }
 
-    public AnaliseDentaria(Integer id, Usuario usuario, LocalDate dataAnalise, double probabilidadeProblema) {
+    public AnaliseDentaria(Integer id, Usuario usuario, LocalDateTime dataAnalise, double probabilidadeProblema, Set<DadoMonitoramento> dadosMonitoramento) {
         this.id = id;
         this.usuario = usuario;
         this.dataAnalise = dataAnalise;
         this.probabilidadeProblema = probabilidadeProblema;
+        this.dadosMonitoramento = dadosMonitoramento;
     }
 
     public Integer getId() {
@@ -55,11 +58,11 @@ public class AnaliseDentaria {
         this.usuario = usuario;
     }
 
-    public LocalDate getDataAnalise() {
+    public LocalDateTime getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(LocalDate dataAnalise) {
+    public void setDataAnalise(LocalDateTime dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 
@@ -69,5 +72,13 @@ public class AnaliseDentaria {
 
     public void setProbabilidadeProblema(double probabilidadeProblema) {
         this.probabilidadeProblema = probabilidadeProblema;
+    }
+
+    public Set<DadoMonitoramento> getDadosMonitoramento() {
+        return dadosMonitoramento;
+    }
+
+    public void setDadosMonitoramento(Set<DadoMonitoramento> dadosMonitoramento) {
+        this.dadosMonitoramento = dadosMonitoramento;
     }
 }
