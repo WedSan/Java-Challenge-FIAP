@@ -5,25 +5,24 @@ import com.DentalWareTeam.Oralytics.model.Usuario;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public class HistoricoDentalDTO {
 
     private Integer id;
-    private Set<ProcedimentoDentario> procedimentosDentarios;
+    private Set<ProcedimentoDentarioDTO> procedimentosDentarios;
 
     @NotNull
-    private Usuario usuario;
+    private UsuarioDTO usuario;
 
     @NotNull
-    private LocalDate dataConsulta;
+    private LocalDateTime dataConsulta;
 
     @Max(30)
     private String condicaoDente;
 
-    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
+    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentarioDTO> procedimentosDentarios, UsuarioDTO  usuario , LocalDateTime dataConsulta, String condicaoDente) {
         this.id = id;
         this.procedimentosDentarios = procedimentosDentarios;
         this.usuario = usuario;
@@ -43,19 +42,19 @@ public class HistoricoDentalDTO {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO  getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 
-    public LocalDate getDataConsulta() {
+    public LocalDateTime getDataConsulta() {
         return dataConsulta;
     }
 
-    public void setDataConsulta(LocalDate dataConsulta) {
+    public void setDataConsulta(LocalDateTime dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 
@@ -67,11 +66,11 @@ public class HistoricoDentalDTO {
         this.condicaoDente = condicaoDente;
     }
 
-    public Set<ProcedimentoDentario> getProcedimentosDentarios() {
+    public Set<ProcedimentoDentarioDTO> getProcedimentosDentarios() {
         return procedimentosDentarios;
     }
 
-    public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
+    public void setProcedimentosDentarios(Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
         this.procedimentosDentarios = procedimentosDentarios;
     }
 }

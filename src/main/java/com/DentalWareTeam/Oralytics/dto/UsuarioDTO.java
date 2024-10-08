@@ -2,26 +2,25 @@ package com.DentalWareTeam.Oralytics.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class UsuarioDTO {
 
     private int id;
 
-    @NotNull
-    @Max(120)
+    @NotBlank(message = "O campo de nome não pode ser nulo")
     private String name;
 
-    @NotNull
     @Email
+    @NotBlank(message = "O campo de email não pode ser nulo")
     private String email;
 
-    @NotNull
-    @Max(255)
+
+    @NotBlank(message = "O campo de senha não pode ser nulo")
     private String senha;
 
-    @NotNull
-    @Max(1)
+    @NotBlank(message = "O campo de genero não pode ser nulo")
     private char genero;
 
     public UsuarioDTO() {
