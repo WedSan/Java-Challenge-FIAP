@@ -1,6 +1,8 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -19,8 +21,13 @@ public class HistoricoDental {
 
     @JoinColumn(name = "id_usuario)")
     @ManyToOne
+    @NotNull
     private Usuario usuario;
+
+    @NotNull
     private LocalDate dataConsulta;
+
+    @Max(30)
     private String condicaoDente;
 
     public HistoricoDental() {

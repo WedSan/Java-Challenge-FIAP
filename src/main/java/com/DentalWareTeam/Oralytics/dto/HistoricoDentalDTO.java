@@ -1,52 +1,77 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
 
 public class HistoricoDentalDTO {
 
-    private int id;
-    private int id_procedimento_dentario;
-    private int id_usuario;
-    private LocalDate data_consulta;
-    private String condicao_dente;
+    private Integer id;
+    private Set<ProcedimentoDentario> procedimentosDentarios;
 
-    public int getId() {
+    @NotNull
+    private Usuario usuario;
+
+    @NotNull
+    private LocalDate dataConsulta;
+
+    @Max(30)
+    private String condicaoDente;
+
+    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentario> procedimentosDentarios, Usuario usuario, LocalDate dataConsulta, String condicaoDente) {
+        this.id = id;
+        this.procedimentosDentarios = procedimentosDentarios;
+        this.usuario = usuario;
+        this.dataConsulta = dataConsulta;
+        this.condicaoDente = condicaoDente;
+    }
+
+    public HistoricoDentalDTO() {
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_procedimento_dentario() {
-        return id_procedimento_dentario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_procedimento_dentario(int id_procedimento_dentario) {
-        this.id_procedimento_dentario = id_procedimento_dentario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public LocalDate getDataConsulta() {
+        return dataConsulta;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setDataConsulta(LocalDate dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 
-    public LocalDate getData_consulta() {
-        return data_consulta;
+    public String getCondicaoDente() {
+        return condicaoDente;
     }
 
-    public void setData_consulta(LocalDate data_consulta) {
-        this.data_consulta = data_consulta;
+    public void setCondicaoDente(String condicaoDente) {
+        this.condicaoDente = condicaoDente;
     }
 
-    public String getCondicao_dente() {
-        return condicao_dente;
+    public Set<ProcedimentoDentario> getProcedimentosDentarios() {
+        return procedimentosDentarios;
     }
 
-    public void setCondicao_dente(String condicao_dente) {
-        this.condicao_dente = condicao_dente;
+    public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
+        this.procedimentosDentarios = procedimentosDentarios;
     }
 }

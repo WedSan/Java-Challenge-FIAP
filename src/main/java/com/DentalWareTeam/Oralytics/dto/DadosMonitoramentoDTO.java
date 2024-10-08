@@ -1,41 +1,64 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.RelatoProblemaDentario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Set;
+
 public class DadosMonitoramentoDTO {
 
-    private int id;
-    private int id_usuario;
-    private int id_relato_problema_dentario;
-    private int data_registro;
+    private Integer id;
 
-    public int getId() {
+    @NotNull
+    private Usuario usuario;
+    private Set<RelatoProblemaDentario> relatosProblemasDentarios;
+
+    @NotNull
+    private LocalDate dataRegistro;
+
+    public DadosMonitoramentoDTO() {
+
+    }
+
+    public DadosMonitoramentoDTO(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, LocalDate dataRegistro) {
+        this.id = id;
+        this.usuario = usuario;
+        this.relatosProblemasDentarios = relatosProblemasDentarios;
+        this.dataRegistro = dataRegistro;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getId_relato_problema_dentario() {
-        return id_relato_problema_dentario;
+    public Set<RelatoProblemaDentario> getRelatosProblemasDentarios() {
+        return relatosProblemasDentarios;
     }
 
-    public void setId_relato_problema_dentario(int id_relato_problema_dentario) {
-        this.id_relato_problema_dentario = id_relato_problema_dentario;
+    public void setRelatosProblemasDentarios(Set<RelatoProblemaDentario> relatosProblemasDentarios) {
+        this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
-    public int getData_registro() {
-        return data_registro;
+    public LocalDate getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setData_registro(int data_registro) {
-        this.data_registro = data_registro;
+    public void setDataRegistro(LocalDate dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 }

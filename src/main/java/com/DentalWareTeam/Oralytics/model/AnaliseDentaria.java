@@ -1,8 +1,11 @@
 package com.DentalWareTeam.Oralytics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_ANALISE_DENTARIA")
@@ -15,9 +18,16 @@ public class AnaliseDentaria {
 
     @JoinColumn(name = "id_usuario")
     @ManyToOne
+    @NotNull
     private Usuario usuario;
+
+    @NotNull
     private LocalDate dataAnalise;
+
+    @NotNull
+    @Max(5)
     private double probabilidadeProblema;
+
 
     public AnaliseDentaria() {
     }
@@ -33,7 +43,7 @@ public class AnaliseDentaria {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
