@@ -12,33 +12,21 @@ import java.util.List;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Max(120)
+    @Column(name = "NOME")
     private String name;
 
-    @NotNull
-    @Email
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @NotNull
-    @Max(255)
+    @Column(name = "SENHA")
     private String senha;
 
-    @NotNull
-    @Max(1)
+    @Column(name = "GENERO")
     private char genero;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<HistoricoDental> historicos;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<DadoMonitoramento> dadosMonitoramento;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<AnaliseDentaria> analiseDentaria;
 
     public Usuario() {
     }
@@ -59,7 +47,7 @@ public class Usuario {
         this.id = id;
     }
 
-    public @NotNull @Max(120) String getName() {
+    public String getName() {
         return name;
     }
 
@@ -67,7 +55,7 @@ public class Usuario {
         this.name = name;
     }
 
-    public @NotNull @Email String getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -75,7 +63,7 @@ public class Usuario {
         this.email = email;
     }
 
-    public @NotNull @Max(255) String getSenha() {
+    public String getSenha() {
         return senha;
     }
 
@@ -83,8 +71,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-    @NotNull
-    @Max(1)
     public char getGenero() {
         return genero;
     }
@@ -93,27 +79,5 @@ public class Usuario {
         this.genero = genero;
     }
 
-    public List<HistoricoDental> getHistoricos() {
-        return historicos;
-    }
 
-    public void setHistoricos(List<HistoricoDental> historicos) {
-        this.historicos = historicos;
-    }
-
-    public List<DadoMonitoramento> getDadosMonitoramento() {
-        return dadosMonitoramento;
-    }
-
-    public void setDadosMonitoramento(List<DadoMonitoramento> dadosMonitoramento) {
-        this.dadosMonitoramento = dadosMonitoramento;
-    }
-
-    public List<AnaliseDentaria> getAnaliseDentaria() {
-        return analiseDentaria;
-    }
-
-    public void setAnaliseDentaria(List<AnaliseDentaria> analiseDentaria) {
-        this.analiseDentaria = analiseDentaria;
-    }
 }
