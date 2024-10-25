@@ -11,18 +11,15 @@ public class RelatoProblemaDentarioDTO {
     private Integer id;
 
     @NotNull
-    @Max(30)
     private String problema;
-    private List<DadoMonitoramento> dadosMonitoramento;
 
     public RelatoProblemaDentarioDTO() {
 
     }
 
-    public RelatoProblemaDentarioDTO(Integer id, String problema, List<DadoMonitoramento> dadosMonitoramento) {
+    public RelatoProblemaDentarioDTO(Integer id, String problema) {
         this.id = id;
         this.problema = problema;
-        this.dadosMonitoramento = dadosMonitoramento;
     }
 
     public Integer getId() {
@@ -39,13 +36,5 @@ public class RelatoProblemaDentarioDTO {
 
     public void setProblema(String problema) {
         this.problema = problema;
-    }
-
-    public List<DadoMonitoramento> getDadosMonitoramento() {
-        return dadosMonitoramento;
-    }
-
-    public void setDadosMonitoramento(List<DadoMonitoramento> dadosMonitoramento) {
-        this.dadosMonitoramento = dadosMonitoramento;
     }
 }

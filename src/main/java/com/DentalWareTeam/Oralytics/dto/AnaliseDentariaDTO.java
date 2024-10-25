@@ -1,35 +1,33 @@
 package com.DentalWareTeam.Oralytics.dto;
 
-import com.DentalWareTeam.Oralytics.model.Usuario;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 public class AnaliseDentariaDTO {
 
     private Integer id;
 
-    @NotNull
-    private Usuario usuario;
+    private UsuarioDTO usuario;
+
+    private LocalDateTime dataAnalise;
 
     @NotNull
-    private LocalDate dataAnalise;
-
-    @NotNull
-    @Max(5)
     private double probalidadeProblema;
+
+    private Set<DadosMonitoramentoDTO> dadosMonitoramento;
 
     public AnaliseDentariaDTO() {
 
     }
 
-    public AnaliseDentariaDTO(Integer id, Usuario usuario, LocalDate dataAnalise, double probalidadeProblema) {
+    public AnaliseDentariaDTO(Integer id, UsuarioDTO usuario, LocalDateTime dataAnalise, double probalidadeProblema, Set<DadosMonitoramentoDTO> dadosMonitoramento) {
         this.id = id;
         this.usuario = usuario;
         this.dataAnalise = dataAnalise;
         this.probalidadeProblema = probalidadeProblema;
+        this.dadosMonitoramento = dadosMonitoramento;
     }
 
     public Integer getId() {
@@ -40,11 +38,11 @@ public class AnaliseDentariaDTO {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 
@@ -52,11 +50,11 @@ public class AnaliseDentariaDTO {
         this.probalidadeProblema = probalidadeProblema;
     }
 
-    public LocalDate getDataAnalise() {
+    public LocalDateTime getDataAnalise() {
         return dataAnalise;
     }
 
-    public void setDataAnalise(LocalDate dataAnalise) {
+    public void setDataAnalise(LocalDateTime dataAnalise) {
         this.dataAnalise = dataAnalise;
     }
 
@@ -66,5 +64,13 @@ public class AnaliseDentariaDTO {
 
     public void setProbalidadeProblema(Double probalidadeProblema) {
         this.probalidadeProblema = probalidadeProblema;
+    }
+
+    public Set<DadosMonitoramentoDTO> getDadosMonitoramento() {
+        return dadosMonitoramento;
+    }
+
+    public void setDadosMonitoramento(Set<DadosMonitoramentoDTO> dadosMonitoramento) {
+        this.dadosMonitoramento = dadosMonitoramento;
     }
 }

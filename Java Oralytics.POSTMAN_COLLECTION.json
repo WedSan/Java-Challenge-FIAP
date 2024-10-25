@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "c253b94e-495a-4b59-b053-6c4e30d87399",
+		"name": "Java Oralytics",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30230400"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Adicionar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"senha\": \"password123\",\r\n  \"genero\": \"M\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Usuario por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Email",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novoEmail\": \"john@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/email/21",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"email",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Senha",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"novaSenha\": \"novaSenha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuarios/senha/21",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"usuarios",
+								"senha",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Historico Dental",
+			"item": [
+				{
+					"name": "Adicionar Historico Dental",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"procedimentosDentarios\": [\r\n      \"Limpeza profunda\",\r\n    \r\n      \"Obturação\"\r\n  ],\r\n  \"usuarioId\": 22,\r\n  \"condicaoDente\": \"Cárie moderada no molar\",\r\n  \"dataConsulta\": \"2024-10-08T14:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/historico-dental",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"historico-dental"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Historicos Dentais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/historico-dental",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"historico-dental"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Historico por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/historico-dental/26",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"historico-dental",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Historico por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/historico-dental/23",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"historico-dental",
+								"23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dados Monitoramento",
+			"item": [
+				{
+					"name": "Adicionar Dado Monitoramento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": 22,\r\n    \"relatosProblemasDentarios\":[\r\n        \"dente sensível\",\r\n        \"dor no dente\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/dados-monitoramento",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dados-monitoramento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Dados Monitoramento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dados-monitoramento",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dados-monitoramento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Dados Monitoramento por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dados-monitoramento/21",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dados-monitoramento",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Dados Monitoramento por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/dados-monitoramento/22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"dados-monitoramento",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analise Dentaria",
+			"item": [
+				{
+					"name": "Adicionar Analise Dentaria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": 21,\r\n    \"dataAnalise\": \"2021-08-24T14:30\",\r\n    \"probabilidadeProblema\": 20.32,\r\n    \"dadosMonitoramentoIds\": [\r\n        21,\r\n        23\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/analise-dentaria",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"analise-dentaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Análises Dentárias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/analise-dentaria",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"analise-dentaria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Análises Dentarias por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/analise-dentaria/22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"analise-dentaria",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Analise Dentaria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/analise-dentaria/22",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"analise-dentaria",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "localhost:8080",
+			"type": "string"
+		}
+	]
+}

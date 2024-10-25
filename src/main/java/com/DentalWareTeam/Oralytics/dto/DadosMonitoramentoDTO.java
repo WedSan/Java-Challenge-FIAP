@@ -1,29 +1,23 @@
 package com.DentalWareTeam.Oralytics.dto;
 
-import com.DentalWareTeam.Oralytics.model.RelatoProblemaDentario;
-import com.DentalWareTeam.Oralytics.model.Usuario;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 public class DadosMonitoramentoDTO {
 
     private Integer id;
 
-    @NotNull
-    private Usuario usuario;
-    private Set<RelatoProblemaDentario> relatosProblemasDentarios;
+    private UsuarioDTO usuario;
+    
+    private Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios;
 
-    @NotNull
-    private LocalDate dataRegistro;
+    private LocalDateTime dataRegistro;
 
     public DadosMonitoramentoDTO() {
 
     }
 
-    public DadosMonitoramentoDTO(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, LocalDate dataRegistro) {
+    public DadosMonitoramentoDTO(Integer id, UsuarioDTO usuario, Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios, LocalDateTime dataRegistro) {
         this.id = id;
         this.usuario = usuario;
         this.relatosProblemasDentarios = relatosProblemasDentarios;
@@ -38,27 +32,27 @@ public class DadosMonitoramentoDTO {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 
-    public Set<RelatoProblemaDentario> getRelatosProblemasDentarios() {
+    public Set<RelatoProblemaDentarioDTO> getRelatosProblemasDentarios() {
         return relatosProblemasDentarios;
     }
 
-    public void setRelatosProblemasDentarios(Set<RelatoProblemaDentario> relatosProblemasDentarios) {
+    public void setRelatosProblemasDentarios(Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios) {
         this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
-    public LocalDate getDataRegistro() {
+    public LocalDateTime getDataRegistro() {
         return dataRegistro;
     }
 
-    public void setDataRegistro(LocalDate dataRegistro) {
+    public void setDataRegistro(LocalDateTime dataRegistro) {
         this.dataRegistro = dataRegistro;
     }
 }

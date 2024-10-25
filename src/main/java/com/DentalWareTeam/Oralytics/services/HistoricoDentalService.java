@@ -1,11 +1,15 @@
 package com.DentalWareTeam.Oralytics.services;
 
+import com.DentalWareTeam.Oralytics.dto.AdicionarHistoricoDentalDTO;
 import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
+import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
+import com.DentalWareTeam.Oralytics.mapper.HistoricoDentalMapper;
 import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.HistoricoDentalRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -24,10 +28,14 @@ public class HistoricoDentalService {
     private final HistoricoDentalRepository historicoDentalRepository;
 
     @Autowired
+    private final UsuarioService usuarioService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public HistoricoDentalService(HistoricoDentalRepository historicoDentalRepository, ModelMapper modelMapper) {
+    public HistoricoDentalService(HistoricoDentalRepository historicoDentalRepository, UsuarioService usuarioService, ModelMapper modelMapper) {
         this.historicoDentalRepository = historicoDentalRepository;
+        this.usuarioService = usuarioService;
         this.modelMapper = modelMapper;
     }
 
@@ -40,25 +48,44 @@ public class HistoricoDentalService {
     }
 
     @Transactional
-    public HistoricoDentalDTO salvarHistoricoDental(HistoricoDentalDTO historicoDentalDTO) {
-        HistoricoDental historicoDental = convertToEntity(historicoDentalDTO);
+    public HistoricoDentalDTO salvarHistoricoDental(AdicionarHistoricoDentalDTO historicoDentalDTO) {
+        HistoricoDental historicoDental = new HistoricoDental();
+        historicoDental.setCondicaoDente(historicoDentalDTO.getCondicaoDente());
+
+        historicoDental.setDataConsulta(historicoDentalDTO.getDataConsulta());
+
+        Usuario usuario =  usuarioService.lerUsuario(historicoDentalDTO.getUsuarioId());
+        historicoDental.setUsuario(usuario);
+
+        Set<ProcedimentoDentario> procedimentoDentario = historicoDentalDTO.getProcedimentosDentarios()
+                        .stream()
+                        .map(procedimentoDentarioDTO -> modelMapper.map(procedimentoDentarioDTO, ProcedimentoDentario.class))
+                        .collect(Collectors.toSet());
+        historicoDental.setProcedimentosDentarios(procedimentoDentario);
+
         HistoricoDental historicoSalvo = historicoDentalRepository.save(historicoDental);
+
         return convertToDTO(historicoSalvo);
     }
 
     public List<HistoricoDentalDTO> listarHistoricoDental() {
         List<HistoricoDental> historicoDentals = historicoDentalRepository.findAll();
         return historicoDentals.stream()
-                .map(this::convertToDTO)
+                .map(HistoricoDentalMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public HistoricoDentalDTO lerHistoricoDental (Integer id) throws HistoricoDentalNotFoundException{
+    public HistoricoDental lerHistoricoDental (Integer id) throws EntityNotFoundException{
         Optional<HistoricoDental> historicoDental = historicoDentalRepository.findById(id);
         if (historicoDental.isPresent()) {
-            return convertToDTO(historicoDental.get());
+            return historicoDental.get();
         }else {
-            throw new HistoricoDentalNotFoundException("Histórico Dental não encontrado com o ID "+ id);
+            throw new EntityNotFoundException("Histórico Dental não encontrado com o ID "+ id);
         }
+    }
+
+    public void deletarHistoricoDental(Integer historicoDentalId){
+        HistoricoDental historicoDental =  lerHistoricoDental(historicoDentalId);
+        historicoDentalRepository.delete(historicoDental);
     }
 }

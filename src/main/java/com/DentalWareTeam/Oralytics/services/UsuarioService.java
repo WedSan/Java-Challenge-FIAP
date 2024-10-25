@@ -45,19 +45,19 @@ public class UsuarioService {
     }
 
     @Transactional
-    public void deletarUsuario (Integer id) throws UsuarioNotFoundException {
+    public void deletarUsuario (Integer id) throws EntityNotFoundException {
         if (!usuarioRepository.existsById(id)){
            throw new UsuarioNotFoundException("Usuário não encontrado com o ID: " + id);
         }
         usuarioRepository.deleteById(id);
     }
 
-    public UsuarioDTO lerUsuario (Integer id) throws UsuarioNotFoundException {
+    public Usuario lerUsuario (Integer id) throws EntityNotFoundException {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()) {
-            return convertToDTO(usuario.get());
+            return usuario.get();
         } else {
-            throw new UsuarioNotFoundException("Usuário não encontrado com ID: " + id);
+            throw new EntityNotFoundException("Usuário não encontrado com ID: " + id);
         }
     }
 
@@ -69,16 +69,18 @@ public class UsuarioService {
     }
 
     @Transactional
-    public UsuarioDTO atualizarEmail (Integer id, String email) throws UsuarioNotFoundException {
-        UsuarioDTO usuario = lerUsuario(id);
+    public Usuario atualizarEmail (Integer id, String email) throws UsuarioNotFoundException {
+        Usuario usuario = lerUsuario(id);
         usuario.setEmail(email);
+        usuarioRepository.save(usuario);
         return usuario;
     }
 
     @Transactional
-    public UsuarioDTO atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
-        UsuarioDTO usuario = lerUsuario(id);
+    public Usuario atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
+        Usuario usuario = lerUsuario(id);
         usuario.setSenha(senha);
+        usuarioRepository.save(usuario);
         return usuario;
     }
 

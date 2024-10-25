@@ -56,14 +56,16 @@ IDE (como IntelliJ ou Eclipse)
 ```
 git clone https://github.com/WedSan/Java-Challenge-FIAP.git
 ```
+2. Va para o arquivo `database_tables.sql` e execute ele para criar as tabelas necessárias
 
-2. Navegue até o diretório do projeto:
+
+3. Navegue até o diretório do projeto:
 
 ```
 cd oralytics
 ```
 
-3. Configure as variáveis de ambiente no arquivo application.properties para a conexão com o banco de dados Oracle:
+4. Configure as variáveis de ambiente no arquivo application.properties para a conexão com o banco de dados Oracle:
 
 ```
 spring.application.name=Oralytics
@@ -71,60 +73,36 @@ spring.datasource.url= ${url_banco}
 spring.datasource.username=${oracle_user)
 spring.datasource.password=${oracle_password}
 spring.datasource.driver-class-name=oracle.jdbc.OracleDriver
+spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
 ```
 
-4. Instale as dependências e compile o projeto com o Gradle:
+5. Instale as dependências e compile o projeto com o Gradle:
 
 ```
 ./gradlew build
 ```
 
-5. Execute a aplicação
+6. Execute a aplicação
 
 ```
 ./gradlew bootRun
 ```
 
-6. Acesse sua ferramenta de teste para interagir com a API
+7Acesse sua ferramenta de teste para interagir com a API
 
 
 ## Diagramas
+### Diagrama tabela banco de dados
+![Alt text](https://i.ibb.co/3TGp8PB/Untitled.png)
 
-ATENÇÃO COLOCAR AQUI AS IMAGENS DOS DIAGRAMAS.
-
-## Link de Apresentação da Proposta Tecnológica
-
-ATENÇÃO COLOCAR AQUI O LINK DO VIDEO.
-
-## Rotas de Endpoints
-
-### AnaliseDentaria
-
-- adicionarAnaliseDentaria = POST ("/AnaliseDentaria")
-- listarAnalisesDentarias = GET ("/AnaliseDentaria")
-- obterAnaliseDentaria = GET ("/AnaliseDentaria/{id}")
-
-### DadosMonitoramento
-
-- adicionarDadoMonitoramento = POST ("/DadosMonitoramento")
-- listarDadosMonitoramento = GET ("/DadosMonitoramento")
-- obterDadoMonitoramento = GET("/DadosMonitoramento/{id}")
-
-### HistoricoDental
-
-- adicionarHistoricoDental = POST ("/historicoDental")
-- listarHistoricos = GET ("/historicoDental")
-- obterHistoricoDental = GET ("/historicoDental/{id})
-
-### Usuario
-
-- adicionarUsuario = POST ("/usuarios")
-- listarUsuarios = GET ("/usuarios")
-- obterUsuario = GET ("/usuarios/{id}")
-- atualizarEmail = GET ("/historicoDental/email/{id}")
-- atualizarSenha = GET ("/historicoDental/senha/{id}")
- 
+## Video explicação projeto
+[LINK PARA O VIDEO](https://www.youtube.com/watch?v=QAhvlBJQTMM)
 
 
+## 📌 Rotas de Endpoints
 
+Utilize o arquivo que está na pasta raiz do projeto:
 
+`Java Oralytics.POSTMAN_COLLECTION.json`
+
+e importe no Postman para consumir todas as rotas e endpoints

@@ -7,8 +7,7 @@ public class ProcedimentoDentarioDTO {
 
     private Integer id;
 
-    @NotNull
-    @Max(50)
+    @NotNull(message = "o campo de procedimento não pode ser nulo")
     private String procedimento;
 
     public ProcedimentoDentarioDTO() {
