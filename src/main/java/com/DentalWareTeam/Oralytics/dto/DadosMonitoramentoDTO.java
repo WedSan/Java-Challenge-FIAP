@@ -1,9 +1,12 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class DadosMonitoramentoDTO {
+public class DadosMonitoramentoDTO extends RepresentationModel<DadosMonitoramentoDTO> {
 
     private Integer id;
 

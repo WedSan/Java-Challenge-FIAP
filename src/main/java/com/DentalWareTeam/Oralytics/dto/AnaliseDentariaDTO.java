@@ -1,11 +1,12 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class AnaliseDentariaDTO {
+public class AnaliseDentariaDTO extends RepresentationModel<AnaliseDentariaDTO> {
 
     private Integer id;
 

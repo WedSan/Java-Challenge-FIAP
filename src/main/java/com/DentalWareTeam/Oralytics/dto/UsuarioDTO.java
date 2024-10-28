@@ -4,8 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
-public class UsuarioDTO {
+public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
 
     private int id;
 

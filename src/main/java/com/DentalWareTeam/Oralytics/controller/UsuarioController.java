@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -30,12 +33,17 @@ public class UsuarioController {
     @GetMapping
     public ResponseEntity<List<UsuarioDTO>> listarUsuarios (){
         List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
-        return ResponseEntity.ok(usuarios);
+        List<UsuarioDTO> usuariosComLink = usuarios.stream().map(usuario -> {
+            usuario.add(linkTo(methodOn(UsuarioController.class).obterUsuario(usuario.getId())).withSelfRel());
+            return usuario;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(usuariosComLink);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<UsuarioDTO> obterUsuario (@PathVariable Integer id){
         Usuario usuario = usuarioService.lerUsuario(id);
+        usuario.add(linkTo(methodOn(UsuarioController.class).listarUsuarios()).withRel("Lista de Usuários"));
         return ResponseEntity.ok(UsuarioMapper.toDTO(usuario));
     }
 

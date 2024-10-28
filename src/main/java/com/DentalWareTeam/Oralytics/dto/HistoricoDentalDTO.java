@@ -4,11 +4,12 @@ import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class HistoricoDentalDTO {
+public class HistoricoDentalDTO extends RepresentationModel<HistoricoDentalDTO> {
 
     private Integer id;
     private Set<ProcedimentoDentarioDTO> procedimentosDentarios;

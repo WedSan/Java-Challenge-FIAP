@@ -1,14 +1,17 @@
 package com.DentalWareTeam.Oralytics.model;
 
+import com.DentalWareTeam.Oralytics.dto.AnaliseDentariaDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
+
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
 @Table(name = "TB_ANALISE_DENTARIA")
-public class AnaliseDentaria {
+public class AnaliseDentaria extends RepresentationModel<AnaliseDentaria> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

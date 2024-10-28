@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/historico-dental")
@@ -29,12 +32,17 @@ public class HistoricoDentalController {
     @GetMapping
     public ResponseEntity<List<HistoricoDentalDTO>> listarHistoricos () {
         List<HistoricoDentalDTO> historicos = historicoDentalService.listarHistoricoDental();
-        return ResponseEntity.ok(historicos);
+        List<HistoricoDentalDTO> historicosComLinks = historicos.stream().map(historico -> {
+            historico.add(linkTo(methodOn(HistoricoDentalController.class).obterHistoricoDental(historico.getId())).withSelfRel());
+            return historico;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(historicosComLinks);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<HistoricoDentalDTO> obterHistoricoDental (@PathVariable Integer id) {
         HistoricoDental historico = historicoDentalService.lerHistoricoDental(id);
+        historico.add(linkTo(methodOn(HistoricoDentalController.class).listarHistoricos()).withRel("Lista de Históricos"));
         return ResponseEntity.ok(HistoricoDentalMapper.toDTO(historico));
     }
 
