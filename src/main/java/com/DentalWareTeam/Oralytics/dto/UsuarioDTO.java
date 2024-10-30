@@ -21,7 +21,7 @@ public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
     @NotBlank(message = "O campo de senha não pode ser nulo")
     private String senha;
 
-    @NotBlank(message = "O campo de genero não pode ser nulo")
+    @NotNull(message = "O campo de genero não pode ser nulo")
     private char genero;
 
     public UsuarioDTO() {

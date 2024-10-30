@@ -10,10 +10,10 @@ public class AdicionarAnaliseDentariaDTO {
     @NotNull(message = "id do usuario não pode ser nulo")
     private int usuarioId;
 
-    @NotBlank(message = "o campo de probabilidade de problema não pode ser nulo")
+    @NotNull(message = "o campo de probabilidade de problema não pode ser nulo")
     private double probalidadeProblema;
 
-    @NotBlank(message = "o campo de dados de monitoramento não pode ser nulo")
+    @NotNull(message = "o campo de dados de monitoramento não pode ser nulo")
     private List<Integer> dadosMonitoramentoIds;
 
     public AdicionarAnaliseDentariaDTO() {
