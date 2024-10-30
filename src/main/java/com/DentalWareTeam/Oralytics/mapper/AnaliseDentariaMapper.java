@@ -12,6 +12,6 @@ public class AnaliseDentariaMapper {
                 analiseDentaria.getDataAnalise(),
                 analiseDentaria.getProbabilidadeProblema(),
                 DadosMonitoramentoMapper.toDTO(analiseDentaria.getDadosMonitoramento())
-        );
+        ).add(analiseDentaria.getLinks());
     }
 }

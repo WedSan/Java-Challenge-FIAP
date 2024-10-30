@@ -10,6 +10,6 @@ public class HistoricoDentalMapper {
                 ProcedimentoDentarioMapper.toDTO(historicoDental.getProcedimentosDentarios()),
                 UsuarioMapper.toDTO(historicoDental.getUsuario()),
                 historicoDental.getDataConsulta(),
-                historicoDental.getCondicaoDente());
+                historicoDental.getCondicaoDente()).add(historicoDental.getLinks());
     }
 }

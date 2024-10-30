@@ -10,7 +10,7 @@ public class RelatoProblemaDentarioMapper {
 
     public static RelatoProblemaDentarioDTO toDTO(RelatoProblemaDentario relatoProblemaDentario){
         return new RelatoProblemaDentarioDTO(relatoProblemaDentario.getId(),
-                relatoProblemaDentario.getProblema());
+                relatoProblemaDentario.getProblema()).add(relatoProblemaDentario.getLinks());
     }
 
     public static Set<RelatoProblemaDentarioDTO> toDTO(Set<RelatoProblemaDentario> relatoProblemaDentario){

@@ -10,6 +10,6 @@ public class UsuarioMapper {
                     usuario.getName(),
                     usuario.getEmail(),
                     usuario.getSenha(),
-                    usuario.getGenero());
+                    usuario.getGenero()).add(usuario.getLinks());
         }
 }

@@ -12,7 +12,7 @@ public class DadosMonitoramentoMapper {
         return new DadosMonitoramentoDTO(dadoMonitoramento.getId(),
                 UsuarioMapper.toDTO(dadoMonitoramento.getUsuario()),
                 RelatoProblemaDentarioMapper.toDTO(dadoMonitoramento.getRelatosProblemasDentarios()),
-                dadoMonitoramento.getDataRegistro());
+                dadoMonitoramento.getDataRegistro()).add(dadoMonitoramento.getLinks());
     }
 
     public static Set<DadosMonitoramentoDTO> toDTO(Set<DadoMonitoramento> dadoMonitoramentos){
