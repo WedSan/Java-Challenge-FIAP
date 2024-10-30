@@ -3,12 +3,13 @@ package com.DentalWareTeam.Oralytics.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
 @Entity
 @Table(name = "TB_PROCEDIMENTO_DENTARIO")
-public class ProcedimentoDentario {
+public class ProcedimentoDentario extends RepresentationModel<ProcedimentoDentario> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
