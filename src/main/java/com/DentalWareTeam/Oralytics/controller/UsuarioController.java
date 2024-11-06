@@ -2,6 +2,7 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.AtualizacaoEmailDTO;
 import com.DentalWareTeam.Oralytics.dto.AtualizacaoSenhaDTO;
+import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.mapper.UsuarioMapper;
 import com.DentalWareTeam.Oralytics.model.Usuario;
@@ -31,9 +32,9 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> listarUsuarios (){
-        List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
-        List<UsuarioDTO> usuariosComLink = usuarios.stream().map(usuario -> {
+    public ResponseEntity<List<ListagemUsuarioDTO>> listarUsuarios (){
+        List<ListagemUsuarioDTO> usuarios = usuarioService.listarUsuarios();
+        List<ListagemUsuarioDTO> usuariosComLink = usuarios.stream().map(usuario -> {
             usuario.add(linkTo(methodOn(UsuarioController.class).obterUsuario(usuario.getId())).withSelfRel());
             return usuario;
         }).collect(Collectors.toList());
@@ -41,10 +42,10 @@ public class UsuarioController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UsuarioDTO> obterUsuario (@PathVariable Integer id){
+    public ResponseEntity<ListagemUsuarioDTO> obterUsuario (@PathVariable Integer id){
         Usuario usuario = usuarioService.lerUsuario(id);
         usuario.add(linkTo(methodOn(UsuarioController.class).listarUsuarios()).withRel("Lista de Usuários"));
-        return ResponseEntity.ok(UsuarioMapper.toDTO(usuario));
+        return ResponseEntity.ok(UsuarioMapper.toListagemUsuarioDTO(usuario));
     }
 
     @PatchMapping("email/{id}")

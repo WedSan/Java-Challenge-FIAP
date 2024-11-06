@@ -15,7 +15,7 @@ public class HistoricoDentalDTO extends RepresentationModel<HistoricoDentalDTO> 
     private Set<ProcedimentoDentarioDTO> procedimentosDentarios;
 
     @NotNull
-    private UsuarioDTO usuario;
+    private ListagemUsuarioDTO usuario;
 
     @NotNull
     private LocalDateTime dataConsulta;
@@ -23,7 +23,7 @@ public class HistoricoDentalDTO extends RepresentationModel<HistoricoDentalDTO> 
     @Max(30)
     private String condicaoDente;
 
-    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentarioDTO> procedimentosDentarios, UsuarioDTO  usuario , LocalDateTime dataConsulta, String condicaoDente) {
+    public HistoricoDentalDTO(Integer id, Set<ProcedimentoDentarioDTO> procedimentosDentarios, ListagemUsuarioDTO  usuario , LocalDateTime dataConsulta, String condicaoDente) {
         this.id = id;
         this.procedimentosDentarios = procedimentosDentarios;
         this.usuario = usuario;
@@ -43,35 +43,35 @@ public class HistoricoDentalDTO extends RepresentationModel<HistoricoDentalDTO> 
         this.id = id;
     }
 
-    public UsuarioDTO  getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
-    }
-
-    public LocalDateTime getDataConsulta() {
-        return dataConsulta;
-    }
-
-    public void setDataConsulta(LocalDateTime dataConsulta) {
-        this.dataConsulta = dataConsulta;
-    }
-
-    public String getCondicaoDente() {
-        return condicaoDente;
-    }
-
-    public void setCondicaoDente(String condicaoDente) {
-        this.condicaoDente = condicaoDente;
-    }
-
     public Set<ProcedimentoDentarioDTO> getProcedimentosDentarios() {
         return procedimentosDentarios;
     }
 
     public void setProcedimentosDentarios(Set<ProcedimentoDentarioDTO> procedimentosDentarios) {
         this.procedimentosDentarios = procedimentosDentarios;
+    }
+
+    public @NotNull ListagemUsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(@NotNull ListagemUsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
+    public @NotNull LocalDateTime getDataConsulta() {
+        return dataConsulta;
+    }
+
+    public void setDataConsulta(@NotNull LocalDateTime dataConsulta) {
+        this.dataConsulta = dataConsulta;
+    }
+
+    public @Max(30) String getCondicaoDente() {
+        return condicaoDente;
+    }
+
+    public void setCondicaoDente(@Max(30) String condicaoDente) {
+        this.condicaoDente = condicaoDente;
     }
 }
