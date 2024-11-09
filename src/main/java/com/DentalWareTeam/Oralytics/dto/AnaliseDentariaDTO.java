@@ -1,15 +1,16 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class AnaliseDentariaDTO {
+public class AnaliseDentariaDTO extends RepresentationModel<AnaliseDentariaDTO> {
 
     private Integer id;
 
-    private UsuarioDTO usuario;
+    private ListagemUsuarioDTO usuario;
 
     private LocalDateTime dataAnalise;
 
@@ -22,7 +23,7 @@ public class AnaliseDentariaDTO {
 
     }
 
-    public AnaliseDentariaDTO(Integer id, UsuarioDTO usuario, LocalDateTime dataAnalise, double probalidadeProblema, Set<DadosMonitoramentoDTO> dadosMonitoramento) {
+    public AnaliseDentariaDTO(Integer id, ListagemUsuarioDTO usuario, LocalDateTime dataAnalise, double probalidadeProblema, Set<DadosMonitoramentoDTO> dadosMonitoramento) {
         this.id = id;
         this.usuario = usuario;
         this.dataAnalise = dataAnalise;
@@ -38,16 +39,12 @@ public class AnaliseDentariaDTO {
         this.id = id;
     }
 
-    public UsuarioDTO getUsuario() {
+    public ListagemUsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(ListagemUsuarioDTO usuario) {
         this.usuario = usuario;
-    }
-
-    public void setProbalidadeProblema(double probalidadeProblema) {
-        this.probalidadeProblema = probalidadeProblema;
     }
 
     public LocalDateTime getDataAnalise() {
@@ -58,11 +55,12 @@ public class AnaliseDentariaDTO {
         this.dataAnalise = dataAnalise;
     }
 
-    public Double getProbalidadeProblema() {
+    @NotNull
+    public double getProbalidadeProblema() {
         return probalidadeProblema;
     }
 
-    public void setProbalidadeProblema(Double probalidadeProblema) {
+    public void setProbalidadeProblema(@NotNull double probalidadeProblema) {
         this.probalidadeProblema = probalidadeProblema;
     }
 

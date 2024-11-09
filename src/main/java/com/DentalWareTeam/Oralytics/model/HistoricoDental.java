@@ -1,8 +1,10 @@
 package com.DentalWareTeam.Oralytics.model;
 
+import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "TB_HISTORICO_DENTAL")
-public class HistoricoDental {
+public class HistoricoDental extends RepresentationModel<HistoricoDental> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

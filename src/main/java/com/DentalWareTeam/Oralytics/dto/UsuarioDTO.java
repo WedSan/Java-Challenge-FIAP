@@ -4,8 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
-public class UsuarioDTO {
+public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
 
     private int id;
 
@@ -20,7 +21,7 @@ public class UsuarioDTO {
     @NotBlank(message = "O campo de senha não pode ser nulo")
     private String senha;
 
-    @NotBlank(message = "O campo de genero não pode ser nulo")
+    @NotNull(message = "O campo de genero não pode ser nulo")
     private char genero;
 
     public UsuarioDTO() {

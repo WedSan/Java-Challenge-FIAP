@@ -8,10 +8,10 @@ public class AnaliseDentariaMapper {
     public static AnaliseDentariaDTO toDTO(AnaliseDentaria analiseDentaria){
         return new AnaliseDentariaDTO(
                 analiseDentaria.getId(),
-                UsuarioMapper.toDTO(analiseDentaria.getUsuario()),
+                UsuarioMapper.toListagemUsuarioDTO(analiseDentaria.getUsuario()),
                 analiseDentaria.getDataAnalise(),
                 analiseDentaria.getProbabilidadeProblema(),
                 DadosMonitoramentoMapper.toDTO(analiseDentaria.getDadosMonitoramento())
-        );
+        ).add(analiseDentaria.getLinks());
     }
 }

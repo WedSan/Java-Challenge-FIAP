@@ -1,12 +1,14 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
+import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
-public class RelatoProblemaDentarioDTO {
+public class RelatoProblemaDentarioDTO extends RepresentationModel<RelatoProblemaDentarioDTO> {
 
     private Integer id;
 

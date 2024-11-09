@@ -9,8 +9,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/dados-monitoramento")
@@ -28,12 +31,17 @@ public class DadosMonitoramentoController {
     @GetMapping
     public ResponseEntity<List<DadosMonitoramentoDTO>> listarDadosMonitoramento () {
         List <DadosMonitoramentoDTO> dados = dadoMonitoramentoService.listarDadosMonitoramento();
-        return ResponseEntity.ok(dados);
+        List <DadosMonitoramentoDTO> dadosComLinks = dados.stream().map(dado -> {
+            dado.add(linkTo(methodOn(DadosMonitoramentoController.class).obterDadosMonitoramento(dado.getId())).withSelfRel());
+            return dado;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(dadosComLinks);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DadosMonitoramentoDTO> obterDadosMonitoramento (@PathVariable Integer id) {
         DadoMonitoramento dadoMonitoramento = dadoMonitoramentoService.lerDadoMonitoramento(id);
+        dadoMonitoramento.add(linkTo(methodOn(DadosMonitoramentoController.class).listarDadosMonitoramento()).withRel("Lista de Análises"));
         return ResponseEntity.ok(DadosMonitoramentoMapper.toDTO(dadoMonitoramento));
     }
 

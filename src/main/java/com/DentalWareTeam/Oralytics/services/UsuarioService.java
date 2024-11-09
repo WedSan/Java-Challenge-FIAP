@@ -1,5 +1,6 @@
 package com.DentalWareTeam.Oralytics.services;
 
+import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
 import com.DentalWareTeam.Oralytics.model.Usuario;
@@ -33,6 +34,10 @@ public class UsuarioService {
         return modelMapper.map(usuario, UsuarioDTO.class);
     }
 
+    private ListagemUsuarioDTO convertToListagemUsarioDTO (Usuario usuario) {
+        return modelMapper.map(usuario, ListagemUsuarioDTO.class);
+    }
+
     private Usuario convertToEntity(UsuarioDTO usuarioDTO) {
         return modelMapper.map(usuarioDTO, Usuario.class);
     }
@@ -61,10 +66,10 @@ public class UsuarioService {
         }
     }
 
-    public List<UsuarioDTO> listarUsuarios() {
+    public List<ListagemUsuarioDTO> listarUsuarios() {
         List<Usuario> usuarios = usuarioRepository.findAll();
         return usuarios.stream()
-                .map(this::convertToDTO)
+                .map(this::convertToListagemUsarioDTO)
                 .collect(Collectors.toList());
     }
 

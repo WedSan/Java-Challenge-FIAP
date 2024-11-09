@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/analise-dentaria")
@@ -28,12 +32,17 @@ public class AnaliseDentariaController {
     @GetMapping
     public ResponseEntity<List<AnaliseDentariaDTO>> listarAnalisesDentarias () {
         List <AnaliseDentariaDTO> analises = analiseDentariaService.listarAnalisesDentarias();
-        return ResponseEntity.ok(analises);
+        List<AnaliseDentariaDTO> analisesComLinks = analises.stream().map(analise -> {
+            analise.add(linkTo(methodOn(AnaliseDentariaController.class).obterAnaliseDentaria(analise.getId())).withSelfRel());
+            return analise;
+        }).collect(Collectors.toList());
+        return ResponseEntity.ok(analisesComLinks);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AnaliseDentariaDTO> obterAnaliseDentaria (@PathVariable Integer id) {
         AnaliseDentaria analiseDentaria = analiseDentariaService.lerAnaliseDentaria(id);
+        analiseDentaria.add(linkTo(methodOn(AnaliseDentariaController.class).listarAnalisesDentarias()).withRel("Lista de Análises"));
         return ResponseEntity.ok(AnaliseDentariaMapper.toDTO(analiseDentaria));
     }
 

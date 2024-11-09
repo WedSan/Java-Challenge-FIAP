@@ -1,13 +1,17 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.RepresentationModel;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class DadosMonitoramentoDTO {
+public class DadosMonitoramentoDTO extends RepresentationModel<DadosMonitoramentoDTO> {
 
     private Integer id;
 
-    private UsuarioDTO usuario;
+    private ListagemUsuarioDTO usuario;
     
     private Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios;
 
@@ -17,7 +21,7 @@ public class DadosMonitoramentoDTO {
 
     }
 
-    public DadosMonitoramentoDTO(Integer id, UsuarioDTO usuario, Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios, LocalDateTime dataRegistro) {
+    public DadosMonitoramentoDTO(Integer id, ListagemUsuarioDTO usuario, Set<RelatoProblemaDentarioDTO> relatosProblemasDentarios, LocalDateTime dataRegistro) {
         this.id = id;
         this.usuario = usuario;
         this.relatosProblemasDentarios = relatosProblemasDentarios;
@@ -32,11 +36,11 @@ public class DadosMonitoramentoDTO {
         this.id = id;
     }
 
-    public UsuarioDTO getUsuario() {
+    public ListagemUsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
+    public void setUsuario(ListagemUsuarioDTO usuario) {
         this.usuario = usuario;
     }
 

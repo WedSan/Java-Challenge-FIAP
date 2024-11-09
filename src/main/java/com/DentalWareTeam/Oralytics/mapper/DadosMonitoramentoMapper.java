@@ -10,9 +10,9 @@ public class DadosMonitoramentoMapper {
 
     public static DadosMonitoramentoDTO toDTO(DadoMonitoramento dadoMonitoramento){
         return new DadosMonitoramentoDTO(dadoMonitoramento.getId(),
-                UsuarioMapper.toDTO(dadoMonitoramento.getUsuario()),
+                UsuarioMapper.toListagemUsuarioDTO(dadoMonitoramento.getUsuario()),
                 RelatoProblemaDentarioMapper.toDTO(dadoMonitoramento.getRelatosProblemasDentarios()),
-                dadoMonitoramento.getDataRegistro());
+                dadoMonitoramento.getDataRegistro()).add(dadoMonitoramento.getLinks());
     }
 
     public static Set<DadosMonitoramentoDTO> toDTO(Set<DadoMonitoramento> dadoMonitoramentos){
