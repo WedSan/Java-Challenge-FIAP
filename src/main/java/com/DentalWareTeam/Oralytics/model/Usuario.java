@@ -18,7 +18,7 @@ public class Usuario extends RepresentationModel<Usuario> {
     private Integer id;
 
     @Column(name = "NOME")
-    private String name;
+    private String nome;
 
     @Column(name = "EMAIL", unique = true)
     private String email;
@@ -28,14 +28,14 @@ public class Usuario extends RepresentationModel<Usuario> {
     private String senha;
 
     @Column(name = "GENERO")
-    private char genero;
+    private String genero;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String name, String email, String senha, char genero) {
+    public Usuario(Integer id, String nome, String email, String senha, String genero) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
@@ -49,12 +49,12 @@ public class Usuario extends RepresentationModel<Usuario> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(@NotNull @Max(120) String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -73,13 +73,11 @@ public class Usuario extends RepresentationModel<Usuario> {
         this.senha = senha;
     }
 
-    public char getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(@NotNull @Max(1) char genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
-
-
 }

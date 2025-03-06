@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Análises Dentárias</title>
+</head>
+<body>
+<h1>Lista de Análises Dentárias</h1>
+
+<div>
+    <a href="/analises-dentarias/novo">Adicionar Nova Análise Dentária</a>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Data da Análise</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="analise : ${analisesDentarias}">
+        <td th:text="${analise.id}"></td>
+        <td th:text="${analise.dataAnalise}"></td>
+        <td>
+            <a th:href="@{/analises-dentarias/{id}(id=${analise.id})}">Ver Detalhes</a> |
+            <a th:href="@{/analises-dentarias/deletar/{id}(id=${analise.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${param.erro}">
+    <p>Erro: A Análise Dentária não foi encontrada.</p>
+</div>
+</body>
+</html>

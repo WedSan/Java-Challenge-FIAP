@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Análise Dentária</title>
+</head>
+<body>
+<h1>Cadastro de Análise Dentária</h1>
+
+<form action="/analises-dentarias" method="post" th:object="${analiseDentaria}">
+    <div>
+        <label for="usuario">Usuário:</label>
+        <select th:field="*{usuarioId}" id="usuario">
+            <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+        </select>
+    </div>
+
+    <br>
+    <br>
+    <div>
+        <label for="dadosMonitoramento">Escolha um Dado de Monitoramento:</label>
+        <br>
+        <select th:field="*{dadosMonitoramentoIds}" id="dadosMonitoramento" multiple>
+            <optgroup th:each="dado : ${dadosMonitoramento}">
+                <option th:each="relato : ${dado.relatosProblemasDentarios}" th:value="${dado.id}"
+                        th:text="${relato.problema}"></option>
+            </optgroup>
+        </select>
+    </div>
+    <br>
+    <button type="submit">Salvar</button>
+</form>
+
+<br>
+
+<a href="/analises-dentarias">Voltar para a lista</a>
+</body>
+</html>

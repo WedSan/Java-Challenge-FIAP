@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Email</title>
+</head>
+<body>
+
+<h1>Atualizar Email</h1>
+
+<form th:action="@{/usuarios/atualizar/senha/{id}(id=${usuarioId})}" method="post">
+    <label for="senha">Digite a nova senha:</label>
+    <input type="password" id="senha" name="novaSenha" required>
+    <button type="submit">Salvar</button>
+    <a href="/usuarios">Voltar para lista</a>
+</form>
+
+</body>
+</html>

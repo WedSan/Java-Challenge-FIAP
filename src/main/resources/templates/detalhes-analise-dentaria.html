@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Análise Dentária</title>
+</head>
+<body>
+<h1>Detalhes da Análise Dentária</h1>
+
+<div>
+    <p><strong>ID:</strong> <span th:text="${analiseDentaria.id}"></span></p>
+    <p><strong>Data da Análise:</strong> <span th:text="${analiseDentaria.dataAnalise}"></span></p>
+    <p><strong>Probabilidade de Problema:</strong> <span th:text="${analiseDentaria.probabilidadeProblema}"></span></p>
+    <p><strong>Usuário:</strong> <span th:text="${analiseDentaria.usuario.nome}"></span></p>
+
+    <h3>Dados de Monitoramento</h3>
+
+</div>
+
+<a href="/analises-dentarias">Voltar para a lista</a>
+
+</body>
+</html>

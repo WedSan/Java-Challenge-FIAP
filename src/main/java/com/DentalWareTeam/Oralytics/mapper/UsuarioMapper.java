@@ -8,7 +8,7 @@ public class UsuarioMapper {
 
         public static UsuarioDTO toDTO(Usuario usuario){
             return new UsuarioDTO(usuario.getId(),
-                    usuario.getName(),
+                    usuario.getNome(),
                     usuario.getEmail(),
                     usuario.getSenha(),
                     usuario.getGenero()).add(usuario.getLinks());
@@ -16,7 +16,7 @@ public class UsuarioMapper {
 
     public static ListagemUsuarioDTO toListagemUsuarioDTO(Usuario usuario){
         return new ListagemUsuarioDTO(usuario.getId(),
-                usuario.getName(),
-                usuario.getEmail()).add(usuario.getLinks());
+                usuario.getNome(),
+                usuario.getEmail(), usuario.getGenero()).add(usuario.getLinks());
     }
 }

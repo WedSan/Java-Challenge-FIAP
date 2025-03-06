@@ -2,53 +2,79 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarAnaliseDentariaDTO;
 import com.DentalWareTeam.Oralytics.dto.AnaliseDentariaDTO;
-import com.DentalWareTeam.Oralytics.mapper.AnaliseDentariaMapper;
 import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
+import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
 import com.DentalWareTeam.Oralytics.services.AnaliseDentariaService;
-import jakarta.validation.Valid;
+import com.DentalWareTeam.Oralytics.services.DadoMonitoramentoService;
+import com.DentalWareTeam.Oralytics.services.UsuarioService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-@RestController
-@RequestMapping("/analise-dentaria")
+@Controller
+@RequestMapping("/analises-dentarias")
 public class AnaliseDentariaController {
 
     @Autowired
     private AnaliseDentariaService analiseDentariaService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private DadoMonitoramentoService dadoMonitoramentoService;
+
+    @GetMapping("/novo")
+    public String exibirFormularioCadastro(Model model) {
+        model.addAttribute("analiseDentaria", new AdicionarAnaliseDentariaDTO());
+        model.addAttribute("usuarios", usuarioService.listarUsuarios());
+        model.addAttribute("dadosMonitoramento", dadoMonitoramentoService.listarDadosMonitoramento());
+        return "formulario-analise-dentaria";
+    }
+
     @PostMapping
-    public ResponseEntity<AnaliseDentariaDTO> adicionarAnaliseDentaria (@RequestBody @Valid AdicionarAnaliseDentariaDTO analiseDentariaDTO){
-        AnaliseDentariaDTO novaAnaliseDentaria = analiseDentariaService.salvarAnaliseDentaria(analiseDentariaDTO);
-        return ResponseEntity.ok(novaAnaliseDentaria);
+    public String adicionarAnaliseDentaria(@ModelAttribute("analiseDentaria") @Valid AdicionarAnaliseDentariaDTO analiseDentariaDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "formulario-analise-dentaria";
+        }
+
+        analiseDentariaService.salvarAnaliseDentaria(analiseDentariaDTO);
+        return "redirect:/analises-dentarias";
     }
 
     @GetMapping
-    public ResponseEntity<List<AnaliseDentariaDTO>> listarAnalisesDentarias () {
-        List <AnaliseDentariaDTO> analises = analiseDentariaService.listarAnalisesDentarias();
-        List<AnaliseDentariaDTO> analisesComLinks = analises.stream().map(analise -> {
-            analise.add(linkTo(methodOn(AnaliseDentariaController.class).obterAnaliseDentaria(analise.getId())).withSelfRel());
-            return analise;
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(analisesComLinks);
+    public String listarAnalisesDentarias(Model model) {
+        List<AnaliseDentariaDTO> analises = analiseDentariaService.listarAnalisesDentarias();
+        model.addAttribute("analisesDentarias", analises);
+        return "analises-dentarias";
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AnaliseDentariaDTO> obterAnaliseDentaria (@PathVariable Integer id) {
-        AnaliseDentaria analiseDentaria = analiseDentariaService.lerAnaliseDentaria(id);
-        analiseDentaria.add(linkTo(methodOn(AnaliseDentariaController.class).listarAnalisesDentarias()).withRel("Lista de Análises"));
-        return ResponseEntity.ok(AnaliseDentariaMapper.toDTO(analiseDentaria));
+    public String exibirDetalhesAnaliseDentaria(@PathVariable Integer id, Model model) {
+        try {
+            AnaliseDentaria analiseDentaria = analiseDentariaService.lerAnaliseDentaria(id);
+            model.addAttribute("analiseDentaria", analiseDentaria);
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("erro", "Análise Dentária não encontrada");
+            return "erro";
+        }
+        return "detalhes-analise-dentaria";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> apagarAnaliseDentaria(@PathVariable Integer id) {
-        analiseDentariaService.apagarAnaliseDentaria(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/deletar/{id}")
+    public String deletarAnaliseDentaria(@PathVariable("id") Integer id) {
+        try {
+            analiseDentariaService.apagarAnaliseDentaria(id);
+        } catch (EntityNotFoundException e) {
+            return "redirect:/analises-dentarias?erro=AnáliseDentariaNaoEncontrada";
+        }
+        return "redirect:/analises-dentarias";
     }
+
 }
