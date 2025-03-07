@@ -2,6 +2,7 @@ package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarAnaliseDentariaDTO;
 import com.DentalWareTeam.Oralytics.dto.AnaliseDentariaDTO;
+import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
 import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
 import com.DentalWareTeam.Oralytics.repositories.AnaliseDentariaRepository;
@@ -56,11 +57,16 @@ public class AnaliseDentariaService {
 
         analise.setDataAnalise(LocalDateTime.now());
 
-        Set<DadoMonitoramento> dadoMonitoramentos = new LinkedHashSet<>();
+        Set<DadosMonitoramentoDTO> dadosMonitoramentoDTO = new LinkedHashSet<>();
         analiseDentariaDTO.getDadosMonitoramentoIds().forEach(id -> {
-            dadoMonitoramentos.add(dadoMonitoramentoService.lerDadoMonitoramento(id));
+            dadosMonitoramentoDTO.add(dadoMonitoramentoService.lerDadoMonitoramento(id));
         });
-        analise.setDadosMonitoramento(dadoMonitoramentos);
+        Set<DadoMonitoramento> dadosMonitoramento = new LinkedHashSet<>();
+        for (DadosMonitoramentoDTO dadoDTO : dadosMonitoramentoDTO) {
+            DadoMonitoramento dado = dadoMonitoramentoService.convertToEntity(dadoDTO);
+            dadosMonitoramento.add(dado);
+        }
+        analise.setDadosMonitoramento(dadosMonitoramento);
 
         AnaliseDentaria analiseSalva = analiseDentariaRepository.save(analise);
         return convertToDTO(analiseSalva);

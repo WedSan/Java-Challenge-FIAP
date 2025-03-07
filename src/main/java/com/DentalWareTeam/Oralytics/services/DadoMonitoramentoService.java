@@ -4,7 +4,9 @@ import com.DentalWareTeam.Oralytics.dto.AdicionarDadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.exceptions.DadoMonitoramentoNotFoundException;
 import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.DadoMonitoramentoRepository;
+import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -24,23 +26,32 @@ public class DadoMonitoramentoService {
     private DadoMonitoramentoRepository dadoMonitoramentoRepository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public DadoMonitoramentoService(DadoMonitoramentoRepository dadoMonitoramentoRepository, ModelMapper modelMapper) {
+    public DadoMonitoramentoService(DadoMonitoramentoRepository dadoMonitoramentoRepository, ModelMapper modelMapper, UsuarioRepository usuarioRepository) {
         this.dadoMonitoramentoRepository = dadoMonitoramentoRepository;
         this.modelMapper = modelMapper;
+        this.usuarioRepository = usuarioRepository;
     }
 
-    private DadosMonitoramentoDTO convertToDTO(DadoMonitoramento dadosMonitoramento) {
+    public DadosMonitoramentoDTO convertToDTO(DadoMonitoramento dadosMonitoramento) {
         return modelMapper.map(dadosMonitoramento, DadosMonitoramentoDTO.class);
     }
 
-    private DadoMonitoramento convertToEntity(DadosMonitoramentoDTO dadosMonitoramentoDTO) {
+    public DadoMonitoramento convertToEntity(DadosMonitoramentoDTO dadosMonitoramentoDTO) {
         return modelMapper.map(dadosMonitoramentoDTO, DadoMonitoramento.class);
     }
 
     private DadoMonitoramento convertToEntity(AdicionarDadosMonitoramentoDTO dadosMonitoramentoDTO) {
-        return modelMapper.map(dadosMonitoramentoDTO, DadoMonitoramento.class);
+        DadoMonitoramento dadoMonitoramento = new DadoMonitoramento();
+        Usuario usuario = usuarioRepository.findById(dadosMonitoramentoDTO.getUsuarioId()).orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+        dadoMonitoramento.setUsuario(usuario);
+        dadoMonitoramento.setDataRegistro(LocalDateTime.now());
+
+        return dadoMonitoramento;
     }
 
     public List<DadosMonitoramentoDTO> listarDadosMonitoramento() {
@@ -50,10 +61,11 @@ public class DadoMonitoramentoService {
                 .collect(Collectors.toList());
     }
 
-    public DadoMonitoramento lerDadoMonitoramento(Integer id) throws EntityNotFoundException {
+    public DadosMonitoramentoDTO lerDadoMonitoramento(Integer id) throws EntityNotFoundException {
         Optional<DadoMonitoramento> dadoMonitoramento = dadoMonitoramentoRepository.findById(id);
         if (dadoMonitoramento.isPresent()) {
-            return dadoMonitoramento.get();
+            DadoMonitoramento dadoExistente = dadoMonitoramento.get();
+            return convertToDTO(dadoExistente);
         }else {
             throw new EntityNotFoundException("Dado de Monitoramento não encontrado com o ID: " + id);
         }
@@ -61,13 +73,12 @@ public class DadoMonitoramentoService {
 
     public DadosMonitoramentoDTO salvarDadoMonitoramento(AdicionarDadosMonitoramentoDTO dadosMonitoramentoDTO) {
         DadoMonitoramento dadoMonitoramento = convertToEntity(dadosMonitoramentoDTO);
-        dadoMonitoramento.setDataRegistro(LocalDateTime.now());
         DadoMonitoramento dadoSalvo = dadoMonitoramentoRepository.save(dadoMonitoramento);
         return convertToDTO(dadoSalvo);
     }
 
     public void apagarDadosMonitoramento(Integer id) {
-        DadoMonitoramento dadoMonitoramento = lerDadoMonitoramento(id);
+        DadosMonitoramentoDTO dadoMonitoramento = lerDadoMonitoramento(id);
         dadoMonitoramentoRepository.deleteById(id);
     }
 

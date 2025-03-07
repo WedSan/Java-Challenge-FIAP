@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Dados de Monitoramento</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h2>Lista de Dados de Monitoramento</h2>
+
+<a href="/dados-monitoramento/novo">Adicionar Novo Dado</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Usuário</th>
+        <th>Data de Registro</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dado : ${dadosMonitoramento}">
+        <td th:text="${dado.id}"></td>
+        <td th:text="${dado.usuario.nome}"></td>
+        <td th:text="${#temporals.format(dado.dataRegistro, 'dd/MM/yyyy HH:mm')}"></td>
+        <td>
+            <a th:href="@{/dados-monitoramento/{id}(id=${dado.id})}">Ver Detalhes</a> |
+            <form th:action="@{/dados-monitoramento/deletar/{id}(id=${dado.id})}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Dado de Monitoramento</title>
+</head>
+<body>
+<h1>Adicionar Dado de Monitoramento</h1>
+
+<form th:action="@{/dados-monitoramento/salvar}" th:object="${dadoMonitoramento}" method="post">
+    <div>
+        <label for="usuarioId">ID do Usuário:</label>
+        <input type="number" id="usuarioId" th:field="*{usuarioId}" required/>
+    </div>
+
+    <div>
+        <h3>Relatos de Problemas Dentários:</h3>
+        <input type="text" th:field="*{relatosProblemasDentarios}" placeholder="Descrição do problema"/>
+    </div>
+
+    <div>
+        <button type="submit">Salvar</button>
+    </div>
+</form>
+
+<a href="/dados-monitoramento">Voltar</a>
+</body>
+</html>
