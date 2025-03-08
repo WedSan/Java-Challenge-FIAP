@@ -5,27 +5,17 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+
 <h2>Detalhes do Dado de Monitoramento</h2>
-
-<!-- Exibe o ID do Dado de Monitoramento -->
 <p><strong>ID do Dado de Monitoramento:</strong> <span th:text="${dadoMonitoramento.id}"></span></p>
-
-<!-- Exibe o ID do Usuário (agora acessando 'usuario.usuarioId') -->
 <p><strong>ID do Usuário:</strong> <span th:text="${dadoMonitoramento.usuario.id}"></span></p>
-
-<!-- Exibe o Nome do Usuário -->
 <p><strong>Usuário:</strong> <span th:text="${dadoMonitoramento.usuario.nome}"></span></p>
-
-<!-- Exibe a Data de Registro -->
 <p><strong>Data de Registro:</strong> <span th:text="${#temporals.format(dadoMonitoramento.dataRegistro, 'dd/MM/yyyy HH:mm')}"></span></p>
-
 <h3>Relatos de Problemas Dentários</h3>
 <ul>
-    <!-- Exibe os relatos de problemas dentários -->
     <li th:each="relato : ${dadoMonitoramento.relatosProblemasDentarios}" th:text="${relato.problema}"></li>
 </ul>
 
-<!-- Link para voltar para a lista de dados de monitoramento -->
 <a href="/dados-monitoramento">Voltar para a Lista</a>
 
 </body>

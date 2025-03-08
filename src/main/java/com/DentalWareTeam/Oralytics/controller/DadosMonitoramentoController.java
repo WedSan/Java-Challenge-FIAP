@@ -4,7 +4,10 @@ import com.DentalWareTeam.Oralytics.dto.AdicionarDadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.mapper.DadosMonitoramentoMapper;
 import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import com.DentalWareTeam.Oralytics.services.DadoMonitoramentoService;
+import com.DentalWareTeam.Oralytics.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -23,6 +27,9 @@ public class DadosMonitoramentoController {
 
     @Autowired
     private DadoMonitoramentoService dadoMonitoramentoService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping("/salvar")
     public String adicionarDadoMonitoramento (@ModelAttribute @Valid AdicionarDadosMonitoramentoDTO dadosMonitoramentoDTO){
@@ -46,6 +53,8 @@ public class DadosMonitoramentoController {
 
     @GetMapping("/novo")
     public String exibirFormularioNovo (Model model) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        model.addAttribute("usuarios", usuarios);
         model.addAttribute("dadoMonitoramento", new AdicionarDadosMonitoramentoDTO());
         return "formulario-dado-monitoramento";
     }

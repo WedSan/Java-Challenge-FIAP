@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Históricos Dentais</title>
+</head>
+<body>
+<h1>Lista de Históricos Dentais</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID do Usuário</th>
+        <th>Condição do Dente</th>
+        <th>Data da Consulta</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="historico : ${historicos}">
+        <td th:text="${historico.usuarioId}"></td>
+        <td th:text="${historico.condicaoDente}"></td>
+        <td th:text="${#temporals.format(historico.dataConsulta, 'dd/MM/yyyy HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/historico/novo">Adicionar Novo Histórico</a>
+</body>
+</html>

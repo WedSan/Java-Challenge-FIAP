@@ -19,15 +19,15 @@ public class RelatoProblemaDentario extends RepresentationModel<RelatoProblemaDe
 
     @ManyToOne
     @JoinColumn(name = "id_dado_monitoramento")
-    private DadoMonitoramento dadosMonitoramento;
+    private DadoMonitoramento dadoMonitoramento;
 
     public RelatoProblemaDentario() {
     }
 
-    public RelatoProblemaDentario(Integer id, String problema, DadoMonitoramento dadosMonitoramento) {
+    public RelatoProblemaDentario(Integer id, String problema, DadoMonitoramento dadoMonitoramento) {
         this.id = id;
         this.problema = problema;
-        this.dadosMonitoramento = dadosMonitoramento;
+        this.dadoMonitoramento = dadoMonitoramento;
     }
 
     public Integer getId() {
@@ -46,11 +46,11 @@ public class RelatoProblemaDentario extends RepresentationModel<RelatoProblemaDe
         this.problema = problema;
     }
 
-    public DadoMonitoramento getDadosMonitoramento() {
-        return dadosMonitoramento;
+    public DadoMonitoramento getDadoMonitoramento() {
+        return dadoMonitoramento;
     }
 
-    public void setDadosMonitoramento(DadoMonitoramento dadosMonitoramento) {
-        this.dadosMonitoramento = dadosMonitoramento;
+    public void setDadoMonitoramento(DadoMonitoramento dadoMonitoramento) {
+        this.dadoMonitoramento = dadoMonitoramento;
     }
 }

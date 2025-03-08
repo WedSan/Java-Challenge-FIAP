@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Relatos de Problemas Dentários</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Relatos de Problemas Dentários</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Problema</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="relato : ${relatos}">
+        <td th:text="${relato.id}"></td>
+        <td th:text="${relato.problema}"></td>
+        <td>
+            <a th:href="@{/relatos-problema-dentario/{id}(id=${relato.id})}">Ver Detalhes</a>
+            <form th:action="@{/relatos-problema-dentario/deletar/{id}(id=${relato.id})}" method="post" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<a href="/relatos-problema-dentario/novo">Adicionar Novo Relato</a>
+</body>
+</html>

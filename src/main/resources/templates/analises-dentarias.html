@@ -8,10 +8,6 @@
 <body>
 <h1>Lista de Análises Dentárias</h1>
 
-<div>
-    <a href="/analises-dentarias/novo">Adicionar Nova Análise Dentária</a>
-</div>
-
 <table border="1">
     <thead>
     <tr>
@@ -31,6 +27,12 @@
     </tr>
     </tbody>
 </table>
+
+<br>
+
+<div>
+    <a href="/analises-dentarias/novo">Adicionar Nova Análise Dentária</a>
+</div>
 
 <div th:if="${param.erro}">
     <p>Erro: A Análise Dentária não foi encontrada.</p>

@@ -6,34 +6,45 @@
     <title>Cadastro de Análise Dentária</title>
 </head>
 <body>
-<h1>Cadastro de Análise Dentária</h1>
+<h1>Cadastro de Nova Análise Dentária</h1>
 
-<form action="/analises-dentarias" method="post" th:object="${analiseDentaria}">
+<form action="#" th:action="@{/analises-dentarias}" th:object="${analiseDentaria}" method="post">
+
+    <!-- Campo Usuario -->
     <div>
-        <label for="usuario">Usuário:</label>
-        <select th:field="*{usuarioId}" id="usuario">
-            <option th:each="usuario : ${usuarios}" th:value="${usuario.id}" th:text="${usuario.nome}"></option>
+        <label for="usuarioId">Usuário</label>
+        <select id="usuarioId" th:field="*{usuarioId}" required>
+            <option th:each="usuario : ${usuarios}"
+                    th:value="${usuario.id}"
+                    th:text="${usuario.nome}">Escolha o Usuário</option>
         </select>
     </div>
 
-    <br>
-    <br>
+    <!-- Campo Probabilidade de Problema -->
     <div>
-        <label for="dadosMonitoramento">Escolha um Dado de Monitoramento:</label>
-        <br>
-        <select th:field="*{dadosMonitoramentoIds}" id="dadosMonitoramento" multiple>
-            <optgroup th:each="dado : ${dadosMonitoramento}">
-                <option th:each="relato : ${dado.relatosProblemasDentarios}" th:value="${dado.id}"
-                        th:text="${relato.problema}"></option>
-            </optgroup>
-        </select>
+        <label for="probabilidadeProblema">Probabilidade do Problema (%)</label>
+        <input type="number" id="probabilidadeProblema" th:field="*{probabilidadeProblema}" step="0.01" min="0" max="100" required />
+        <small>Insira um valor de 0 a 100</small>
     </div>
+
+    <!-- Campo Dados de Monitoramento -->
+    <div>
+        <label>Dados de Monitoramento</label>
+        <div th:each="dado : ${dadosMonitoramento}">
+            <input type="checkbox" th:field="*{dadosMonitoramentoIds}" th:value="${dado.id}" />
+            <label th:text="${dado.dataRegistro}"></label>
+        </div>
+    </div>
+
     <br>
-    <button type="submit">Salvar</button>
+
+    <div>
+        <button type="submit">Cadastrar Análise Dentária</button>
+    </div>
 </form>
 
 <br>
+<a href="/analises-dentarias">Voltar para a lista de análises dentárias</a>
 
-<a href="/analises-dentarias">Voltar para a lista</a>
 </body>
 </html>

@@ -2,53 +2,56 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarHistoricoDentalDTO;
 import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
-import com.DentalWareTeam.Oralytics.mapper.HistoricoDentalMapper;
 import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import com.DentalWareTeam.Oralytics.services.HistoricoDentalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/historico-dental")
+@Controller
+@RequestMapping("/historico")
 public class HistoricoDentalController {
 
     @Autowired
     private HistoricoDentalService historicoDentalService;
 
-    @PostMapping
-    public ResponseEntity<HistoricoDentalDTO> adicionarHistoricoDental (@RequestBody @Valid AdicionarHistoricoDentalDTO historicoDentalDTO){
-        HistoricoDentalDTO historico = historicoDentalService.salvarHistoricoDental(historicoDentalDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(historico);
-    }
-
     @GetMapping
-    public ResponseEntity<List<HistoricoDentalDTO>> listarHistoricos () {
+    public String listarHistoricos(Model model) {
         List<HistoricoDentalDTO> historicos = historicoDentalService.listarHistoricoDental();
-        List<HistoricoDentalDTO> historicosComLinks = historicos.stream().map(historico -> {
-            historico.add(linkTo(methodOn(HistoricoDentalController.class).obterHistoricoDental(historico.getId())).withSelfRel());
-            return historico;
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(historicosComLinks);
+        model.addAttribute("historicos", historicos);
+        return "historicos-dentais";
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<HistoricoDentalDTO> obterHistoricoDental (@PathVariable Integer id) {
+    public String obterHistoricoDental(@PathVariable Integer id, Model model) {
         HistoricoDental historico = historicoDentalService.lerHistoricoDental(id);
-        historico.add(linkTo(methodOn(HistoricoDentalController.class).listarHistoricos()).withRel("Lista de Históricos"));
-        return ResponseEntity.ok(HistoricoDentalMapper.toDTO(historico));
+        model.addAttribute("historico", historico);
+        return "detalhes-historico-dental";
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarHistoricoDental(@PathVariable Integer id){
+    @GetMapping("/novo")
+    public String exibirFormulario(Model model) {
+        model.addAttribute("historicoDTO", new AdicionarHistoricoDentalDTO());
+        return "formulario-historico-dental";
+    }
+
+    @PostMapping
+    public String adicionarHistoricoDental(@ModelAttribute("historicoDTO") @Valid AdicionarHistoricoDentalDTO historicoDTO,
+                                           BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "formulario-historico-dental";
+        }
+        historicoDentalService.salvarHistoricoDental(historicoDTO);
+        return "redirect:/historicos-dentais";
+    }
+
+    @PostMapping("/deletar/{id}")
+    public String deletarHistoricoDental(@PathVariable Integer id) {
         historicoDentalService.deletarHistoricoDental(id);
-        return ResponseEntity.noContent().build();
+        return "redirect:/historicos-dentais";
     }
 }

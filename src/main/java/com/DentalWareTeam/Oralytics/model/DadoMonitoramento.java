@@ -20,7 +20,7 @@ public class DadoMonitoramento extends RepresentationModel<DadoMonitoramento> {
     @NotNull
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "dadosMonitoramento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "dadoMonitoramento", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<RelatoProblemaDentario> relatosProblemasDentarios;
 
     private LocalDateTime dataRegistro;
@@ -29,16 +29,17 @@ public class DadoMonitoramento extends RepresentationModel<DadoMonitoramento> {
             joinColumns = @JoinColumn(name = "id_dado_monitoramento"),
             inverseJoinColumns = @JoinColumn(name = "id_analise_dentaria"))
     @ManyToMany
-    private Set<AnaliseDentaria> analisesDentarios;
+    private Set<AnaliseDentaria> analisesDentarias;
 
     public DadoMonitoramento() {
     }
 
-    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, LocalDateTime dataRegistro) {
+    public DadoMonitoramento(Integer id, Usuario usuario, Set<RelatoProblemaDentario> relatosProblemasDentarios, LocalDateTime dataRegistro, Set<AnaliseDentaria> analisesDentarias) {
         this.id = id;
         this.usuario = usuario;
         this.relatosProblemasDentarios = relatosProblemasDentarios;
         this.dataRegistro = dataRegistro;
+        this.analisesDentarias = analisesDentarias;
     }
 
     public Integer getId() {
@@ -62,7 +63,6 @@ public class DadoMonitoramento extends RepresentationModel<DadoMonitoramento> {
     }
 
     public void setRelatosProblemasDentarios(Set<RelatoProblemaDentario> relatosProblemasDentarios) {
-        relatosProblemasDentarios.forEach(relato -> relato.setDadosMonitoramento(this));
         this.relatosProblemasDentarios = relatosProblemasDentarios;
     }
 
@@ -74,11 +74,11 @@ public class DadoMonitoramento extends RepresentationModel<DadoMonitoramento> {
         this.dataRegistro = dataRegistro;
     }
 
-    public Set<AnaliseDentaria> getAnalisesDentarios() {
-        return analisesDentarios;
+    public Set<AnaliseDentaria> getAnalisesDentarias() {
+        return analisesDentarias;
     }
 
-    public void setAnalisesDentarios(Set<AnaliseDentaria> analisesDentarios) {
-        this.analisesDentarios = analisesDentarios;
+    public void setAnalisesDentarias(Set<AnaliseDentaria> analisesDentarias) {
+        this.analisesDentarias = analisesDentarias;
     }
 }

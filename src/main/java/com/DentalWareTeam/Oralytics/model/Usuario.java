@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_USUARIO")
@@ -29,6 +30,15 @@ public class Usuario extends RepresentationModel<Usuario> {
 
     @Column(name = "GENERO")
     private String genero;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<AnaliseDentaria> analisesDentarias;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<DadoMonitoramento> dadosMonitoramento;
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<HistoricoDental> historicosDentais;
 
     public Usuario() {
     }

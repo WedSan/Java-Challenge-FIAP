@@ -19,6 +19,10 @@ public class AdicionarHistoricoDentalDTO {
     @NotNull(message = "o campo de data da consulta não pode ser nulo")
     private LocalDateTime dataConsulta;
 
+    public AdicionarHistoricoDentalDTO() {
+
+    }
+
     public AdicionarHistoricoDentalDTO(Set<AdicionarProcedimentosDentarioDTO> procedimentosDentarios, int usuarioId, String condicaoDente, LocalDateTime dataConsulta) {
         this.procedimentosDentarios = procedimentosDentarios;
         this.usuarioId = usuarioId;

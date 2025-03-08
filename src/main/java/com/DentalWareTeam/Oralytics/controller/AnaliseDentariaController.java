@@ -48,6 +48,7 @@ public class AnaliseDentariaController {
         return "redirect:/analises-dentarias";
     }
 
+    // Listar todas as análises dentárias
     @GetMapping
     public String listarAnalisesDentarias(Model model) {
         List<AnaliseDentariaDTO> analises = analiseDentariaService.listarAnalisesDentarias();
@@ -55,6 +56,7 @@ public class AnaliseDentariaController {
         return "analises-dentarias";
     }
 
+    // Exibir detalhes de uma análise dentária
     @GetMapping("/{id}")
     public String exibirDetalhesAnaliseDentaria(@PathVariable Integer id, Model model) {
         try {
@@ -67,6 +69,7 @@ public class AnaliseDentariaController {
         return "detalhes-analise-dentaria";
     }
 
+    // Deletar uma análise dentária
     @GetMapping("/deletar/{id}")
     public String deletarAnaliseDentaria(@PathVariable("id") Integer id) {
         try {
@@ -75,6 +78,19 @@ public class AnaliseDentariaController {
             return "redirect:/analises-dentarias?erro=AnáliseDentariaNaoEncontrada";
         }
         return "redirect:/analises-dentarias";
+    }
+
+    // Atualizar probabilidade de problema
+    @GetMapping("/atualizar/{id}")
+    public String exibirFormularioAtualizarProbabilidade(@PathVariable Integer id, Model model) {
+        try {
+            AnaliseDentaria analiseDentaria = analiseDentariaService.lerAnaliseDentaria(id);
+            model.addAttribute("analiseDentaria", analiseDentaria);
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("erro", "Análise Dentária não encontrada");
+            return "erro";
+        }
+        return "atualizar-probabilidade";
     }
 
 }

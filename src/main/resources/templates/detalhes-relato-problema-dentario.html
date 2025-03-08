@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Relato</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<h1>Detalhes do Relato</h1>
+
+<p><strong>ID:</strong> <span th:text="${relato.id}"></span></p>
+<p><strong>Problema:</strong> <span th:text="${relato.problema}"></span></p>
+
+<a href="/relatos-problema-dentario">Voltar</a>
+</body>
+</html>
