@@ -1,45 +1,25 @@
 package com.DentalWareTeam.Oralytics.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.HashSet;
 
 public class AdicionarHistoricoDentalDTO {
 
-    private Set<AdicionarProcedimentosDentarioDTO> procedimentosDentarios;
-
-    @NotNull(message = "id do usuario não pode ser nulo")
-    private int usuarioId;
-
-    @NotBlank(message = "o campo de condição do dente não pode ser nulo")
+    private Integer usuarioId;
     private String condicaoDente;
-
-    @NotNull(message = "o campo de data da consulta não pode ser nulo")
     private LocalDateTime dataConsulta;
+    private Set<Integer> procedimentosDentarios;
 
     public AdicionarHistoricoDentalDTO() {
-
+        this.procedimentosDentarios = new HashSet<>();
     }
 
-    public AdicionarHistoricoDentalDTO(Set<AdicionarProcedimentosDentarioDTO> procedimentosDentarios, int usuarioId, String condicaoDente, LocalDateTime dataConsulta) {
-        this.procedimentosDentarios = procedimentosDentarios;
-        this.usuarioId = usuarioId;
-        this.condicaoDente = condicaoDente;
-        this.dataConsulta = dataConsulta;
-    }
-
-    public AdicionarHistoricoDentalDTO(LocalDateTime dataConsulta) {
-
-        this.dataConsulta = dataConsulta;
-    }
-
-    public int getUsuarioId() {
+    public Integer getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(int usuarioId) {
+    public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
 
@@ -51,19 +31,19 @@ public class AdicionarHistoricoDentalDTO {
         this.condicaoDente = condicaoDente;
     }
 
-    public Set<AdicionarProcedimentosDentarioDTO> getProcedimentosDentarios() {
-        return procedimentosDentarios;
-    }
-
-    public void setProcedimentosDentarios(Set<AdicionarProcedimentosDentarioDTO> procedimentosDentarios) {
-        this.procedimentosDentarios = procedimentosDentarios;
-    }
-
     public LocalDateTime getDataConsulta() {
         return dataConsulta;
     }
 
     public void setDataConsulta(LocalDateTime dataConsulta) {
         this.dataConsulta = dataConsulta;
+    }
+
+    public Set<Integer> getProcedimentosDentarios() {
+        return procedimentosDentarios;
+    }
+
+    public void setProcedimentosDentarios(Set<Integer> procedimentosDentarios) {
+        this.procedimentosDentarios = procedimentosDentarios;
     }
 }

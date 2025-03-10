@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Históricos Dentais</title>
+    <meta charset="UTF-8">
+    <title>Lista de Históricos Dentários</title>
 </head>
 <body>
-<h1>Lista de Históricos Dentais</h1>
+<h1>Históricos Dentários</h1>
+<a href="/historico/novo">Adicionar Novo Histórico</a>
 <table>
     <thead>
     <tr>
-        <th>ID do Usuário</th>
-        <th>Condição do Dente</th>
+        <th>ID</th>
+        <th>Condicao Dente</th>
         <th>Data da Consulta</th>
+        <th>Ações</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="historico : ${historicos}">
-        <td th:text="${historico.usuarioId}"></td>
+    <tr th:each="historico : ${historicoDentalList}">
+        <td th:text="${historico.id}"></td>
         <td th:text="${historico.condicaoDente}"></td>
-        <td th:text="${#temporals.format(historico.dataConsulta, 'dd/MM/yyyy HH:mm')}"></td>
+        <td th:text="${historico.dataConsulta}"></td>
+        <td>
+            <a th:href="@{/historico/{id}(id=${historico.id})}">Ver</a>
+            <a th:href="@{/historico/deletar/{id}(id=${historico.id})}">Deletar</a>
+        </td>
     </tr>
     </tbody>
 </table>
-
-<a href="/historico/novo">Adicionar Novo Histórico</a>
 </body>
 </html>

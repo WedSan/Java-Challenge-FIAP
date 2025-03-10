@@ -78,7 +78,9 @@ public class DadoMonitoramentoService {
     }
 
     public void apagarDadosMonitoramento(Integer id) {
-        DadosMonitoramentoDTO dadoMonitoramento = lerDadoMonitoramento(id);
+        if (!dadoMonitoramentoRepository.existsById(id)) {
+            throw new RuntimeException("dado não encontrado");
+        }
         dadoMonitoramentoRepository.deleteById(id);
     }
 

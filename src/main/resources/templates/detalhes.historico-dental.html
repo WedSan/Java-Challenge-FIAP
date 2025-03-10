@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizar Histórico Dental</title>
+</head>
+<body>
+<h1>Histórico Dental</h1>
+<p>ID: <span th:text="${historicoDentalDTO.id}"></span></p>
+<p>Condicao do Dente: <span th:text="${historicoDentalDTO.condicaoDente}"></span></p>
+<p>Data da Consulta: <span th:text="${historicoDentalDTO.dataConsulta}"></span></p>
+<!-- Você pode adicionar outros campos aqui -->
+<a href="/historico">Voltar para a lista</a>
+</body>
+</html>

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ProcedimentoDentarioMapper {
     public static ProcedimentoDentarioDTO toDTO(ProcedimentoDentario procedimentoDentario){
-        return new ProcedimentoDentarioDTO(procedimentoDentario.getId(), procedimentoDentario.getProcedimento()).add(procedimentoDentario.getLinks());
+        return new ProcedimentoDentarioDTO(procedimentoDentario.getId(), procedimentoDentario.getProcedimento(), procedimentoDentario.getHistoricoDental()).add(procedimentoDentario.getLinks());
     }
 
     public static Set<ProcedimentoDentarioDTO> toDTO(Set<ProcedimentoDentario> procedimentosDentarios){

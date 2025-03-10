@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Procedimentos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Procedimentos Dentários</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Procedimento</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="procedimento : ${procedimentos}">
+        <td th:text="${procedimento.id}"></td>
+        <td th:text="${procedimento.procedimento}"></td>
+        <td>
+            <a th:href="@{/procedimentos/excluir/{id}(id=${procedimento.id})}">
+                Excluir
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/procedimentos/novo">Adicionar Procedimento</a>
+</body>
+</html>

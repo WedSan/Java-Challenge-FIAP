@@ -53,6 +53,9 @@ public class RelatoProblemaDentarioService {
     }
 
     public void excluirRelato(Integer id) {
+        if (!relatoProblemaDentarioRepository.existsById(id)) {
+            throw new RuntimeException("Relato não encontrado");
+        }
         relatoProblemaDentarioRepository.deleteById(id);
     }
 }

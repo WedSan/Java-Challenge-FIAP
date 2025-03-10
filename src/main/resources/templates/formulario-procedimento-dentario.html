@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Procedimento Dentário</title>
+</head>
+<body>
+<div>
+    <h2>Adicionar Novo Procedimento Dentário</h2>
+    <form action="/procedimentos/salvar" method="post" id="formularioProcedimentoDentario">
+        <div>
+            <label for="descricao">Nome do Procedimento</label>
+            <input type="text" id="descricao" name="descricao" required>
+        </div>
+
+        <button type="submit">Salvar Procedimento Dentário</button>
+    </form>
+</div>
+</body>
+</html>

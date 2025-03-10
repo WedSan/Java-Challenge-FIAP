@@ -53,7 +53,6 @@ public class HistoricoDental extends RepresentationModel<HistoricoDental> {
     }
 
     public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
-        procedimentosDentarios.forEach(e -> e.setHistoricoDental(this));
         this.procedimentosDentarios = procedimentosDentarios;
     }
 

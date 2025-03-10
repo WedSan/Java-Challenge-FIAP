@@ -85,7 +85,9 @@ public class AnaliseDentariaService {
     }
 
     public void apagarAnaliseDentaria(Integer id) {
-        AnaliseDentaria analiseDentaria = lerAnaliseDentaria(id);
-        analiseDentariaRepository.delete(analiseDentaria);
+        if (!analiseDentariaRepository.existsById(id)) {
+            throw new RuntimeException("análise não encontrado");
+        }
+        analiseDentariaRepository.deleteById(id);
     }
 }

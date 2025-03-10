@@ -75,17 +75,21 @@ public class HistoricoDentalService {
                 .collect(Collectors.toList());
     }
 
-    public HistoricoDental lerHistoricoDental (Integer id) throws EntityNotFoundException{
+    public HistoricoDentalDTO lerHistoricoDental (Integer id) throws EntityNotFoundException{
         Optional<HistoricoDental> historicoDental = historicoDentalRepository.findById(id);
         if (historicoDental.isPresent()) {
-            return historicoDental.get();
+            HistoricoDental historicoDentalExistente = historicoDental.get();
+            HistoricoDental historicoSalvo = historicoDentalRepository.save(historicoDentalExistente);
+            return convertToDTO(historicoSalvo);
         }else {
             throw new EntityNotFoundException("Histórico Dental não encontrado com o ID "+ id);
         }
     }
 
     public void deletarHistoricoDental(Integer historicoDentalId){
-        HistoricoDental historicoDental =  lerHistoricoDental(historicoDentalId);
-        historicoDentalRepository.delete(historicoDental);
+        if (!historicoDentalRepository.existsById(historicoDentalId)) {
+            throw new RuntimeException("historico não encontrado");
+        }
+        historicoDentalRepository.deleteById(historicoDentalId);
     }
 }
