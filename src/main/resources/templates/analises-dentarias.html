@@ -4,38 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Análises Dentárias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Lista de Análises Dentárias</h1>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Data da Análise</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="analise : ${analisesDentarias}">
-        <td th:text="${analise.id}"></td>
-        <td th:text="${analise.dataAnalise}"></td>
-        <td>
-            <a th:href="@{/analises-dentarias/{id}(id=${analise.id})}">Ver Detalhes</a> |
-            <a th:href="@{/analises-dentarias/deletar/{id}(id=${analise.id})}">Deletar</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-<br>
-
-<div>
-    <a href="/analises-dentarias/novo">Adicionar Nova Análise Dentária</a>
+<div class="container mt-5">
+    <h1 class="text-center">Lista de Análises Dentárias</h1>
+    <div class="card p-4 shadow-sm">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Data da Análise</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="analise : ${analisesDentarias}">
+                <td th:text="${analise.id}"></td>
+                <td th:text="${analise.dataAnalise}"></td>
+                <td>
+                    <a th:href="@{/analises-dentarias/{id}(id=${analise.id})}" class="btn btn-info btn-sm">Ver Detalhes</a>
+                    <a th:href="@{/analises-dentarias/deletar/{id}(id=${analise.id})}" class="btn btn-danger btn-sm">Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center mt-3">
+            <a href="/analises-dentarias/novo" class="btn btn-success">Adicionar Nova Análise Dentária</a>
+        </div>
+        <div th:if="${param.erro}" class="alert alert-danger mt-3" role="alert">
+            <p>Erro: A Análise Dentária não foi encontrada.</p>
+        </div>
+    </div>
 </div>
-
-<div th:if="${param.erro}">
-    <p>Erro: A Análise Dentária não foi encontrada.</p>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

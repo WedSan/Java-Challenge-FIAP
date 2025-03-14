@@ -4,36 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes da Análise Dentária</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Detalhes da Análise Dentária</h1>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Detalhes da Análise Dentária</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID:</dt>
+                <dd class="col-sm-9" th:text="${analiseDentaria.id}"></dd>
 
-<div>
-    <p><strong>ID:</strong> <span th:text="${analiseDentaria.id}"></span></p>
-    <p><strong>Usuário:</strong> <span th:text="${analiseDentaria.usuario.nome}"></span></p>
-    <p><strong>Data da Análise:</strong> <span th:text="${analiseDentaria.dataAnalise}"></span></p>
-    <p><strong>Probabilidade de Problema:</strong> <span th:text="${analiseDentaria.probabilidadeProblema}"></span></p>
+                <dt class="col-sm-3">Usuário:</dt>
+                <dd class="col-sm-9" th:text="${analiseDentaria.usuario.nome}"></dd>
 
+                <dt class="col-sm-3">Data da Análise:</dt>
+                <dd class="col-sm-9" th:text="${analiseDentaria.dataAnalise}"></dd>
 
-    <p><strong>Dados de Monitoramento:</strong></p>
-    <ul>
-        <li th:each="dado : ${analiseDentaria.dadosMonitoramento}">
-            <strong>Data de Registro:</strong> <span th:text="${#temporals.format(dado.dataRegistro, 'dd/MM/yyyy')}"></span>
+                <dt class="col-sm-3">Probabilidade de Problema:</dt>
+                <dd class="col-sm-9" th:text="${analiseDentaria.probabilidadeProblema}"></dd>
+            </dl>
 
-            <ul>
-                <li th:each="relato : ${dado.relatosProblemasDentarios}">
-                    <strong>Relato:</strong> <span th:text="${relato.problema}"></span>
+            <h5 class="mt-4">Dados de Monitoramento:</h5>
+            <ul class="list-group">
+                <li th:each="dado : ${analiseDentaria.dadosMonitoramento}" class="list-group-item">
+                    <strong>Data de Registro:</strong>
+                    <span th:text="${#temporals.format(dado.dataRegistro, 'dd/MM/yyyy')}"></span>
+
+                    <ul class="mt-2">
+                        <li th:each="relato : ${dado.relatosProblemasDentarios}" class="list-group-item">
+                            <strong>Relato:</strong> <span th:text="${relato.problema}"></span>
+                        </li>
+                    </ul>
                 </li>
             </ul>
-        </li>
-    </ul>
-
-
-
-
+            <a href="/analises-dentarias" class="btn btn-primary mt-3">Voltar para a lista</a>
+        </div>
+    </div>
 </div>
 
-<a href="/analises-dentarias">Voltar para a lista</a>
-
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

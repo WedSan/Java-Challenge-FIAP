@@ -1,36 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatos de Problemas Dentários</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Relatos de Problemas Dentários</h1>
+<body class="bg-light">
 
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Problema</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="relato : ${relatos}">
-        <td th:text="${relato.id}"></td>
-        <td th:text="${relato.problema}"></td>
-        <td>
-            <a th:href="@{/relatos-problema-dentario/{id}(id=${relato.id})}">Ver Detalhes</a>
-            <form th:action="@{/relatos-problema-dentario/deletar/{id}(id=${relato.id})}" method="post" style="display:inline;">
-                <button type="submit">Excluir</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Relatos de Problemas Dentários</h1>
+        </div>
+        <div class="card-body">
+            <a href="/relatos-problema-dentario/novo" class="btn btn-success mb-3">Adicionar Novo Relato</a>
 
-<br>
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Problema</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="relato : ${relatos}">
+                    <td th:text="${relato.id}"></td>
+                    <td th:text="${relato.problema}"></td>
+                    <td>
+                        <a th:href="@{/relatos-problema-dentario/{id}(id=${relato.id})}" class="btn btn-info btn-sm">Ver Detalhes</a>
+                        <form th:action="@{/relatos-problema-dentario/deletar/{id}(id=${relato.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<a href="/relatos-problema-dentario/novo">Adicionar Novo Relato</a>
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
