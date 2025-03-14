@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Visualizar Histórico Dental</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Histórico Dental</h1>
-<p>ID: <span th:text="${historicoDentalDTO.id}"></span></p>
-<p>Condicao do Dente: <span th:text="${historicoDentalDTO.condicaoDente}"></span></p>
-<p>Data da Consulta: <span th:text="${historicoDentalDTO.dataConsulta}"></span></p>
-<!-- Você pode adicionar outros campos aqui -->
-<a href="/historico">Voltar para a lista</a>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Histórico Dental</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID:</dt>
+                <dd class="col-sm-9" th:text="${historicoDentalDTO.id}"></dd>
+
+                <dt class="col-sm-3">Condição do Dente:</dt>
+                <dd class="col-sm-9" th:text="${historicoDentalDTO.condicaoDente}"></dd>
+
+                <dt class="col-sm-3">Data da Consulta:</dt>
+                <dd class="col-sm-9" th:text="${historicoDentalDTO.dataConsulta}"></dd>
+            </dl>
+            <a href="/historico" class="btn btn-primary mt-3">Voltar para a lista</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

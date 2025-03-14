@@ -2,14 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Detalhes do Relato</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
-<h1>Detalhes do Relato</h1>
+<body class="bg-light">
 
-<p><strong>ID:</strong> <span th:text="${relato.id}"></span></p>
-<p><strong>Problema:</strong> <span th:text="${relato.problema}"></span></p>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Detalhes do Relato</h1>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID:</dt>
+                <dd class="col-sm-9" th:text="${relato.id}"></dd>
 
-<a href="/relatos-problema-dentario">Voltar</a>
+                <dt class="col-sm-3">Problema:</dt>
+                <dd class="col-sm-9" th:text="${relato.problema}"></dd>
+            </dl>
+
+            <a href="/relatos-problema-dentario" class="btn btn-primary mt-3">Voltar</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
