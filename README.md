@@ -98,6 +98,9 @@ spring.jpa.database-platform=org.hibernate.dialect.OracleDialect
 ## Video explicação projeto
 [LINK PARA O VIDEO](https://www.youtube.com/watch?v=QAhvlBJQTMM)
 
+## Video de apresentação da entrega da 3° sprint do challenge
+![LINK PARA O VIDEO](https://www.youtube.com/watch?v=Ffdme4-XyUQ)
+
 
 ## 📌 Rotas de Endpoints
 
