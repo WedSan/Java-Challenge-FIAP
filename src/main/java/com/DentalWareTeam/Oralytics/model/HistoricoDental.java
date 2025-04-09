@@ -1,12 +1,9 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
+import com.DentalWareTeam.Oralytics.model.user.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 

@@ -10,4 +10,6 @@ public class OralyticsApplication {
 		SpringApplication.run(OralyticsApplication.class, args);
 	}
 
+
+
 }

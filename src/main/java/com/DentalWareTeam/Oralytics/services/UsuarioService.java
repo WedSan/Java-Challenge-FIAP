@@ -3,26 +3,32 @@ package com.DentalWareTeam.Oralytics.services;
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
-import com.DentalWareTeam.Oralytics.model.Usuario;
+import com.DentalWareTeam.Oralytics.model.user.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements UserDetailsService {
 
     @Autowired
     private final UsuarioRepository usuarioRepository;
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
@@ -45,6 +51,7 @@ public class UsuarioService {
     @Transactional
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = convertToEntity(usuarioDTO);
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
         return convertToDTO(usuarioSalvo);
     }
@@ -84,9 +91,20 @@ public class UsuarioService {
     @Transactional
     public Usuario atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
         Usuario usuario = lerUsuario(id);
-        usuario.setSenha(senha);
+        usuario.setSenha(passwordEncoder.encode(senha));
         usuarioRepository.save(usuario);
         return usuario;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(usuario.getEmail())
+                .password(usuario.getSenha())
+                .authorities(usuario.getRole())
+                .build();
+    }
 }

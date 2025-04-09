@@ -2,24 +2,17 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarDadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
-import com.DentalWareTeam.Oralytics.mapper.DadosMonitoramentoMapper;
-import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
-import com.DentalWareTeam.Oralytics.model.Usuario;
+import com.DentalWareTeam.Oralytics.model.user.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import com.DentalWareTeam.Oralytics.services.DadoMonitoramentoService;
-import com.DentalWareTeam.Oralytics.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/dados-monitoramento")

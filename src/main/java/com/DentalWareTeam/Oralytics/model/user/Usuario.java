@@ -1,18 +1,23 @@
-package com.DentalWareTeam.Oralytics.model;
+package com.DentalWareTeam.Oralytics.model.user;
 
-import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
+import com.DentalWareTeam.Oralytics.model.AnaliseDentaria;
+import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
+import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.hateoas.RepresentationModel;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "TB_USUARIO")
-public class Usuario extends RepresentationModel<Usuario> {
+public class Usuario{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +36,9 @@ public class Usuario extends RepresentationModel<Usuario> {
     @Column(name = "GENERO")
     private String genero;
 
+    @Column(name = "ROLE")
+    private String role;
+
     @OneToMany(mappedBy = "usuario")
     private Set<AnaliseDentaria> analisesDentarias;
 
@@ -43,12 +51,13 @@ public class Usuario extends RepresentationModel<Usuario> {
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nome, String email, String senha, String genero) {
+    public Usuario(Integer id, String nome, String email, String senha, String genero, String role) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -89,5 +98,13 @@ public class Usuario extends RepresentationModel<Usuario> {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

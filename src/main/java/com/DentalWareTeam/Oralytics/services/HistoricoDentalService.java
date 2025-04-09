@@ -2,16 +2,13 @@ package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarHistoricoDentalDTO;
 import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
-import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
-import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
 import com.DentalWareTeam.Oralytics.mapper.HistoricoDentalMapper;
 import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
-import com.DentalWareTeam.Oralytics.model.Usuario;
+import com.DentalWareTeam.Oralytics.model.user.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.HistoricoDentalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
