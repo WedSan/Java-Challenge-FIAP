@@ -8,7 +8,7 @@
 <div class="container mt-5">
     <h2 class="text-center">Lista de Dados de Monitoramento</h2>
     <div class="text-center mb-3">
-        <a href="/dados-monitoramento/novo" class="btn btn-success">Adicionar Novo Dado</a>
+        <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/dados-monitoramento/novo" class="btn btn-success">Adicionar Novo Dado</a>
     </div>
     <div class="card p-4 shadow-sm">
         <table class="table table-bordered table-striped">
@@ -27,7 +27,7 @@
                 <td th:text="${#temporals.format(dado.dataRegistro, 'dd/MM/yyyy HH:mm')}"></td>
                 <td>
                     <a th:href="@{/dados-monitoramento/{id}(id=${dado.id})}" class="btn btn-info btn-sm">Ver Detalhes</a>
-                    <form th:action="@{/dados-monitoramento/deletar/{id}(id=${dado.id})}" method="post" class="d-inline">
+                    <form th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:action="@{/dados-monitoramento/deletar/{id}(id=${dado.id})}" method="post" class="d-inline">
                         <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
                     </form>
                 </td>

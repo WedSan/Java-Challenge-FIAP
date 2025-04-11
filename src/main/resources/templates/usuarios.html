@@ -28,15 +28,15 @@
                 <td th:text="${usuario.genero}"></td>
                 <td>
                     <a th:href="@{/usuarios/{id}(id=${usuario.id})}" class="btn btn-info btn-sm">Ver detalhes</a>
-                    <a th:href="@{/usuarios/deletar/{id}(id=${usuario.id})}" class="btn btn-danger btn-sm">Excluir</a>
-                    <a th:href="@{/usuarios/atualizar/email/{id}(id=${usuario.id})}" class="btn btn-warning btn-sm">Atualizar Email</a>
-                    <a th:href="@{/usuarios/atualizar/senha/{id}(id=${usuario.id})}" class="btn btn-secondary btn-sm">Atualizar Senha</a>
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/usuarios/deletar/{id}(id=${usuario.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/usuarios/atualizar/email/{id}(id=${usuario.id})}" class="btn btn-warning btn-sm">Atualizar Email</a>
+                    <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" th:href="@{/usuarios/atualizar/senha/{id}(id=${usuario.id})}" class="btn btn-secondary btn-sm">Atualizar Senha</a>
                 </td>
             </tr>
             </tbody>
         </table>
-        <div class="text-cente  r">
-            <a href="/usuarios/novo" class="btn btn-success">Adicionar Novo Usuário</a>
+        <div class="text-center">
+            <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" href="/usuarios/novo" class="btn btn-success">Adicionar Novo Usuário</a>
         </div>
     </div>
 </div>
