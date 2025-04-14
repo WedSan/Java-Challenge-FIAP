@@ -13,6 +13,7 @@
         <table class="table table-bordered">
             <thead class="table-dark">
             <tr>
+                <th>ID</th>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Gênero</th>
@@ -20,6 +21,7 @@
             </thead>
             <tbody>
             <tr>
+                <td th:text="${usuario.id}"></td>
                 <td th:text="${usuario.nome}"></td>
                 <td th:text="${usuario.email}"></td>
                 <td th:text="${usuario.genero}"></td>
