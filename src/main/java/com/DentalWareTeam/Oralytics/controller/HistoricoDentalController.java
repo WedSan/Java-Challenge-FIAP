@@ -3,7 +3,7 @@ package com.DentalWareTeam.Oralytics.controllers;
 import com.DentalWareTeam.Oralytics.dto.*;
 import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.ProcedimentoDentarioRepository;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import com.DentalWareTeam.Oralytics.services.HistoricoDentalService;

@@ -2,7 +2,7 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarDadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import com.DentalWareTeam.Oralytics.services.DadoMonitoramentoService;
 import jakarta.validation.Valid;

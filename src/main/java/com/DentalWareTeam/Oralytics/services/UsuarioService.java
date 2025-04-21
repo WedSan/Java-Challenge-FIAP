@@ -3,7 +3,8 @@ package com.DentalWareTeam.Oralytics.services;
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
+import com.DentalWareTeam.Oralytics.mapper.UsuarioMapper;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -21,39 +22,32 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioService implements UserDetailsService {
 
-    @Autowired
+
     private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+
+    private final PasswordEncoder passwordEncoder;
 
 
-    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
+    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.modelMapper = modelMapper;
-    }
-
-    private UsuarioDTO convertToDTO(Usuario usuario) {
-        return modelMapper.map(usuario, UsuarioDTO.class);
+        this.passwordEncoder = passwordEncoder;
     }
 
     private ListagemUsuarioDTO convertToListagemUsarioDTO (Usuario usuario) {
         return modelMapper.map(usuario, ListagemUsuarioDTO.class);
     }
 
-    private Usuario convertToEntity(UsuarioDTO usuarioDTO) {
-        return modelMapper.map(usuarioDTO, Usuario.class);
-    }
 
     @Transactional
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
-        Usuario usuario = convertToEntity(usuarioDTO);
+        Usuario usuario = UsuarioMapper.toEntity(usuarioDTO);
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
-        return convertToDTO(usuarioSalvo);
+        return UsuarioMapper.toDTO(usuarioSalvo);
     }
 
     @Transactional

@@ -3,7 +3,7 @@ package com.DentalWareTeam.Oralytics.services;
 import com.DentalWareTeam.Oralytics.dto.AdicionarDadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.dto.DadosMonitoramentoDTO;
 import com.DentalWareTeam.Oralytics.model.DadoMonitoramento;
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.DadoMonitoramentoRepository;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;

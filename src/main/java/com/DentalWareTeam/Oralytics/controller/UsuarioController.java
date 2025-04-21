@@ -2,7 +2,8 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
+import com.DentalWareTeam.Oralytics.model.Role;
+import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.services.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,14 @@ public class UsuarioController {
     @GetMapping("/novo")
     public String exibirFormularioCadastro(Model model) {
         model.addAttribute("usuario", new UsuarioDTO());
+        model.addAttribute("roles", Role.values());
         return "formulario-usuario";
     }
 
     @PostMapping
-    public String adicionarUsuario (@ModelAttribute("usuario") @Valid UsuarioDTO usuarioDTO, BindingResult result){
+    public String adicionarUsuario (@ModelAttribute("usuario") @Valid UsuarioDTO usuarioDTO, BindingResult result, Model model){
         if (result.hasErrors()) {
+            model.addAttribute("roles", Role.values());
             return "formulario-usuario";
         }
         usuarioService.salvarUsuario(usuarioDTO);

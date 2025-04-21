@@ -1,12 +1,11 @@
 package com.DentalWareTeam.Oralytics.dto;
 
+import com.DentalWareTeam.Oralytics.model.Role;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.hateoas.RepresentationModel;
 
-public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
+public class UsuarioDTO {
 
     private int id;
 
@@ -24,16 +23,20 @@ public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
     @NotNull(message = "O campo de genero não pode ser nulo")
     private String genero;
 
+    @NotNull(message = "O campo de role não pode ser nulo")
+    private Role role;
+
     public UsuarioDTO() {
 
     }
 
-    public UsuarioDTO(int id, String nome, String email, String senha, String genero) {
+    public UsuarioDTO(int id, String nome, String email, String senha, String genero, Role role) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
+        this.role = role;
     }
 
     public int getId() {
@@ -75,4 +78,14 @@ public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
     public void setGenero(@NotNull(message = "O campo de genero não pode ser nulo") String genero) {
         this.genero = genero;
     }
+
+    public @NotNull(message = "O campo de role não pode ser nulo") Role getRole() {
+        return role;
+    }
+
+    public void setRole(@NotNull(message = "O campo de role não pode ser nulo") Role role) {
+        this.role = role;
+    }
+
+
 }

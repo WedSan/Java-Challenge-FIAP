@@ -1,6 +1,5 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import com.DentalWareTeam.Oralytics.model.user.Usuario;
 import jakarta.persistence.*;
 import org.springframework.hateoas.RepresentationModel;
 
