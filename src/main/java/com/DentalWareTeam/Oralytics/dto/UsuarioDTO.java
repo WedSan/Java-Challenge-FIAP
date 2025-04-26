@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+import java.util.Set;
+
 public class UsuarioDTO {
 
     private int id;
@@ -24,19 +27,19 @@ public class UsuarioDTO {
     private String genero;
 
     @NotNull(message = "O campo de role não pode ser nulo")
-    private Role role;
+    private Set<Role> roles;
 
     public UsuarioDTO() {
 
     }
 
-    public UsuarioDTO(int id, String nome, String email, String senha, String genero, Role role) {
+    public UsuarioDTO(int id, String nome, String email, String senha, String genero, Set<Role> roles) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
-        this.role = role;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -79,13 +82,11 @@ public class UsuarioDTO {
         this.genero = genero;
     }
 
-    public @NotNull(message = "O campo de role não pode ser nulo") Role getRole() {
-        return role;
+    public @NotNull(message = "O campo de role não pode ser nulo") Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(@NotNull(message = "O campo de role não pode ser nulo") Role role) {
-        this.role = role;
+    public void setRoles(@NotNull(message = "O campo de role não pode ser nulo") Set<Role> roles) {
+        this.roles = roles;
     }
-
-
 }

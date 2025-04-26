@@ -2,16 +2,15 @@ package com.DentalWareTeam.Oralytics.controller;
 
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
-import com.DentalWareTeam.Oralytics.model.Role;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.services.UsuarioService;
+import com.DentalWareTeam.Oralytics.services.RoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import java.util.List;
 
@@ -22,17 +21,20 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private RoleService roleService;
+
     @GetMapping("/novo")
     public String exibirFormularioCadastro(Model model) {
         model.addAttribute("usuario", new UsuarioDTO());
-        model.addAttribute("roles", Role.values());
+        model.addAttribute("roles", roleService.listarTodasRoles());
         return "formulario-usuario";
     }
 
     @PostMapping
     public String adicionarUsuario (@ModelAttribute("usuario") @Valid UsuarioDTO usuarioDTO, BindingResult result, Model model){
         if (result.hasErrors()) {
-            model.addAttribute("roles", Role.values());
+            model.addAttribute("roles", roleService.listarTodasRoles());
             return "formulario-usuario";
         }
         usuarioService.salvarUsuario(usuarioDTO);
@@ -85,6 +87,4 @@ public class UsuarioController {
         usuarioService.deletarUsuario(id);
         return "redirect:/usuarios";
     }
-
-
 }

@@ -12,7 +12,7 @@ public class UsuarioMapper {
                     usuario.getEmail(),
                     usuario.getSenha(),
                     usuario.getGenero(),
-                    usuario.getRole());
+                    usuario.getRoles());
         }
 
     public static ListagemUsuarioDTO toListagemUsuarioDTO(Usuario usuario){
@@ -27,6 +27,6 @@ public class UsuarioMapper {
                     usuarioDTO.getEmail(),
                     usuarioDTO.getSenha(),
                     usuarioDTO.getGenero(),
-                    usuarioDTO.getRole());
+                    usuarioDTO.getRoles());
     }
 }
