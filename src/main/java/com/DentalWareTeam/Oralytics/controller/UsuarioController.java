@@ -6,6 +6,7 @@ import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.services.UsuarioService;
 import com.DentalWareTeam.Oralytics.services.RoleService;
 import jakarta.validation.Valid;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -38,6 +42,7 @@ public class UsuarioController {
             return "formulario-usuario";
         }
         usuarioService.salvarUsuario(usuarioDTO);
+        rabbitTemplate.convertAndSend("cadastro.concluido",usuarioDTO);
         return "redirect:/usuarios";
     }
 
