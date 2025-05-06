@@ -9,8 +9,13 @@
         .navbar-dark {
             background-color: #000;
         }
-        .welcome-msg {
-            margin-top: 80px;
+
+        body {
+            padding-top: 100px;
+        }
+
+        .descricao-app {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -46,21 +51,21 @@
                         <li><a class="dropdown-item" href="?lang=en">🇺🇸 English</a></li>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- Título e subtítulo -->
+<div class="container text-center">
+    <h1 class="display-4" th:text="#{home.title}"></h1>
+    <p class="lead mt-3" th:text="#{home.subtitle}"></p>
+</div>
 
-<h1 class="display-4" th:text="#{home.title}"></h1>
-<p class="lead mt-3" th:text="#{home.subtitle}"></p>
-
-<section class="descricao-app">
-    <h1 th:text="#{descricao.titulo}"></h1>
+<!-- Descrição -->
+<section class="descricao-app container">
     <p th:text="#{descricao.texto}"></p>
 </section>
-
 
 <!-- Rodapé -->
 <footer class="footer mt-auto py-3 bg-light text-center">
