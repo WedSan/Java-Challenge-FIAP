@@ -4,7 +4,7 @@ import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class EmailConsumer {
 
     @RabbitListener(queues = "cadastro.concluido")

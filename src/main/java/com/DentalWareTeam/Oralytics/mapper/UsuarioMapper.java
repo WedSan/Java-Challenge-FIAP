@@ -4,6 +4,8 @@ import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 
+import java.util.Collections;
+
 public class UsuarioMapper {
 
         public static UsuarioDTO toDTO(Usuario usuario){
@@ -12,7 +14,7 @@ public class UsuarioMapper {
                     usuario.getEmail(),
                     usuario.getSenha(),
                     usuario.getGenero(),
-                    usuario.getRoles());
+                    usuario.getRoles().toString());
         }
 
     public static ListagemUsuarioDTO toListagemUsuarioDTO(Usuario usuario){
@@ -27,6 +29,6 @@ public class UsuarioMapper {
                     usuarioDTO.getEmail(),
                     usuarioDTO.getSenha(),
                     usuarioDTO.getGenero(),
-                    usuarioDTO.getRoles());
+                    Collections.EMPTY_SET);
     }
 }

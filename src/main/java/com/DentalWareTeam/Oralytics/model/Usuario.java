@@ -13,7 +13,7 @@ import java.util.Set;
 public class Usuario implements UserDetails{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "NOME")

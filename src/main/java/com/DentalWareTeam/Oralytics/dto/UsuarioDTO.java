@@ -1,12 +1,8 @@
 package com.DentalWareTeam.Oralytics.dto;
 
-import com.DentalWareTeam.Oralytics.model.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.List;
-import java.util.Set;
 
 public class UsuarioDTO {
 
@@ -26,20 +22,19 @@ public class UsuarioDTO {
     @NotNull(message = "O campo de genero não pode ser nulo")
     private String genero;
 
-    @NotNull(message = "O campo de role não pode ser nulo")
-    private Set<Role> roles;
+    private String role;
 
     public UsuarioDTO() {
 
     }
 
-    public UsuarioDTO(int id, String nome, String email, String senha, String genero, Set<Role> roles) {
+    public UsuarioDTO(int id, String nome, String email, String senha, String genero, String role) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
-        this.roles = roles;
+        this.role = role;
     }
 
     public int getId() {
@@ -82,11 +77,11 @@ public class UsuarioDTO {
         this.genero = genero;
     }
 
-    public @NotNull(message = "O campo de role não pode ser nulo") Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(@NotNull(message = "O campo de role não pode ser nulo") Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 }
