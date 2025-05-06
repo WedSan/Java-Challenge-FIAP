@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Oralytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-dark {
+            background-color: #000;
+        }
+        .welcome-msg {
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Oralytics</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/usuarios}">Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/analises-dentarias}">Análises Dentárias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dados-monitoramento}">Dado de Monitoramento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/relatos-problema-dentario}">Relatos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        🌐 Idioma
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                        <li><a class="dropdown-item" href="?lang=pt">🇧🇷 Português</a></li>
+                        <li><a class="dropdown-item" href="?lang=en">🇺🇸 English</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<h1 class="display-4" th:text="#{home.title}"></h1>
+<p class="lead mt-3" th:text="#{home.subtitle}"></p>
+
+<section class="descricao-app">
+    <h1 th:text="#{descricao.titulo}"></h1>
+    <p th:text="#{descricao.texto}"></p>
+</section>
+
+
+<!-- Rodapé -->
+<footer class="footer mt-auto py-3 bg-light text-center">
+    <div class="container">
+        <span class="text-muted">&copy; 2025 Oralytics</span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
