@@ -51,6 +51,11 @@
                         <li><a class="dropdown-item" href="?lang=en">🇺🇸 English</a></li>
                     </ul>
                 </li>
+                <li class="nav-item ms-2">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="nav-link">🚪 Logout</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
