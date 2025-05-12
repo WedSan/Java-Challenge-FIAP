@@ -11,7 +11,6 @@ public class EmailConsumer {
 
     @Autowired
     private EmailService emailService;
-
     @RabbitListener(queues = "cadastro.concluido")
     public void enviarEmailBoasVindas(UsuarioDTO usuario) {
         System.out.println("Usuário recebido da fila: " + usuario.getNome());
