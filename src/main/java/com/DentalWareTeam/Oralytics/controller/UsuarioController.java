@@ -42,7 +42,6 @@ public class UsuarioController {
             return "formulario-usuario";
         }
         usuarioService.salvarUsuario(usuarioDTO);
-        rabbitTemplate.convertAndSend("cadastro.concluido",usuarioDTO);
         return "redirect:/usuarios";
     }
 

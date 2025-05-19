@@ -3,12 +3,14 @@ package com.DentalWareTeam.Oralytics.services;
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
+import com.DentalWareTeam.Oralytics.infra.config.RabbitConfig;
 import com.DentalWareTeam.Oralytics.mapper.UsuarioMapper;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,15 +29,20 @@ public class UsuarioService implements UserDetailsService {
 
     private final UsuarioRepository usuarioRepository;
 
+    private final RabbitTemplate rabbitTemplate;
 
     private final ModelMapper modelMapper;
+
+    private final LogCadastroService logCadastroService;
 
     private final PasswordEncoder passwordEncoder;
 
 
-    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RabbitTemplate rabbitTemplate, ModelMapper modelMapper, LogCadastroService logCadastroService, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.rabbitTemplate = rabbitTemplate;
         this.modelMapper = modelMapper;
+        this.logCadastroService = logCadastroService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -49,6 +56,7 @@ public class UsuarioService implements UserDetailsService {
         Usuario usuario = UsuarioMapper.toEntity(usuarioDTO);
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_NAME,RabbitConfig.ROUTING_KEY,usuarioDTO);
         return UsuarioMapper.toDTO(usuarioSalvo);
     }
 
