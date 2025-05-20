@@ -37,10 +37,7 @@ public class UsuarioController {
 
     @PostMapping
     public String adicionarUsuario (@ModelAttribute("usuario") @Valid UsuarioDTO usuarioDTO, BindingResult result, Model model){
-        if (result.hasErrors()) {
-            model.addAttribute("roles", roleService.listarTodasRoles());
-            return "formulario-usuario";
-        }
+        model.addAttribute("roles", roleService.listarTodasRoles());
         usuarioService.salvarUsuario(usuarioDTO);
         return "redirect:/usuarios";
     }
