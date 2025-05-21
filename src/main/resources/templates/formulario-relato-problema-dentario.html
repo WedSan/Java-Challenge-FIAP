@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Relato de Problema Dentário</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Novo Relato de Problema Dentário</h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/relatos-problema-dentario/salvar}" method="post" th:object="${adicionarRelatoProblemaDentarioDTO}">
+
+                <!-- Campo Problema -->
+                <div class="form-group">
+                    <label for="problema">Problema:</label>
+                    <input type="text" id="problema" th:field="*{problema}" class="form-control" required>
+                    <div th:if="${#fields.hasErrors('problema')}" th:errors="*{problema}" style="color: red;"></div>
+                </div>
+
+                <!-- Selecione o Dado de Monitoramento -->
+                <div class="form-group">
+                    <label for="dadoMonitoramento">Selecione o Dado Monitoramento:</label>
+                    <select id="dadoMonitoramento" th:field="*{dadoMonitoramento}" class="form-control">
+                        <option th:each="dado : ${dadosMonitoramento}" th:value="${dado.id}" th:text="${dado.dataRegistro}"></option>
+                    </select>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link para voltar -->
+    <br>
+    <a href="/relatos-problema-dentario" class="btn btn-secondary">Voltar</a>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

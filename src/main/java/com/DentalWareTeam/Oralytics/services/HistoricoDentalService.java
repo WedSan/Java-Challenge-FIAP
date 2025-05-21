@@ -2,8 +2,6 @@ package com.DentalWareTeam.Oralytics.services;
 
 import com.DentalWareTeam.Oralytics.dto.AdicionarHistoricoDentalDTO;
 import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
-import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
-import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
 import com.DentalWareTeam.Oralytics.mapper.HistoricoDentalMapper;
 import com.DentalWareTeam.Oralytics.model.HistoricoDental;
 import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
@@ -11,7 +9,6 @@ import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.HistoricoDentalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,17 +72,21 @@ public class HistoricoDentalService {
                 .collect(Collectors.toList());
     }
 
-    public HistoricoDental lerHistoricoDental (Integer id) throws EntityNotFoundException{
+    public HistoricoDentalDTO lerHistoricoDental (Integer id) throws EntityNotFoundException{
         Optional<HistoricoDental> historicoDental = historicoDentalRepository.findById(id);
         if (historicoDental.isPresent()) {
-            return historicoDental.get();
+            HistoricoDental historicoDentalExistente = historicoDental.get();
+            HistoricoDental historicoSalvo = historicoDentalRepository.save(historicoDentalExistente);
+            return convertToDTO(historicoSalvo);
         }else {
             throw new EntityNotFoundException("Histórico Dental não encontrado com o ID "+ id);
         }
     }
 
     public void deletarHistoricoDental(Integer historicoDentalId){
-        HistoricoDental historicoDental =  lerHistoricoDental(historicoDentalId);
-        historicoDentalRepository.delete(historicoDental);
+        if (!historicoDentalRepository.existsById(historicoDentalId)) {
+            throw new RuntimeException("historico não encontrado");
+        }
+        historicoDentalRepository.deleteById(historicoDentalId);
     }
 }

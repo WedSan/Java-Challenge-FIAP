@@ -6,39 +6,36 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public class AdicionarAnaliseDentariaDTO {
+    
+    private Integer usuarioId;
 
-    @NotNull(message = "id do usuario não pode ser nulo")
-    private int usuarioId;
+    private Double probabilidadeProblema;
 
-    @NotNull(message = "o campo de probabilidade de problema não pode ser nulo")
-    private double probalidadeProblema;
-
-    @NotNull(message = "o campo de dados de monitoramento não pode ser nulo")
     private List<Integer> dadosMonitoramentoIds;
 
     public AdicionarAnaliseDentariaDTO() {
     }
 
-    public AdicionarAnaliseDentariaDTO(int usuarioId, double probalidadeProblema, List<Integer> dadosMonitoramentoIds) {
+    public AdicionarAnaliseDentariaDTO(Integer usuarioId, Double probabilidadeProblema, List<Integer> dadosMonitoramentoIds) {
         this.usuarioId = usuarioId;
-        this.probalidadeProblema = probalidadeProblema;
+        this.probabilidadeProblema = probabilidadeProblema;
         this.dadosMonitoramentoIds = dadosMonitoramentoIds;
     }
 
-    public int getUsuarioId() {
+    public Integer getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(int usuarioId) {
+    public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
 
-    public double getProbalidadeProblema() {
-        return probalidadeProblema;
+    public Double getProbabilidadeProblema() {
+        return probabilidadeProblema;
     }
 
-    public void setProbalidadeProblema(double probalidadeProblema) {
-        this.probalidadeProblema = probalidadeProblema;
+    public void setProbabilidadeProblema(Double probabilidadeProblema) {
+        this.probabilidadeProblema = probabilidadeProblema;
     }
 
     public List<Integer> getDadosMonitoramentoIds() {

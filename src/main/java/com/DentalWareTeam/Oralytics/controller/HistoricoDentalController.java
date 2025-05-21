@@ -1,54 +1,82 @@
-package com.DentalWareTeam.Oralytics.controller;
+package com.DentalWareTeam.Oralytics.controllers;
 
-import com.DentalWareTeam.Oralytics.dto.AdicionarHistoricoDentalDTO;
-import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
-import com.DentalWareTeam.Oralytics.mapper.HistoricoDentalMapper;
-import com.DentalWareTeam.Oralytics.model.HistoricoDental;
+import com.DentalWareTeam.Oralytics.dto.*;
+import com.DentalWareTeam.Oralytics.exceptions.HistoricoDentalNotFoundException;
+import com.DentalWareTeam.Oralytics.model.ProcedimentoDentario;
+import com.DentalWareTeam.Oralytics.model.Usuario;
+import com.DentalWareTeam.Oralytics.repositories.ProcedimentoDentarioRepository;
+import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import com.DentalWareTeam.Oralytics.services.HistoricoDentalService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/historico-dental")
+@Controller
+@RequestMapping("/historico")
 public class HistoricoDentalController {
 
     @Autowired
     private HistoricoDentalService historicoDentalService;
 
-    @PostMapping
-    public ResponseEntity<HistoricoDentalDTO> adicionarHistoricoDental (@RequestBody @Valid AdicionarHistoricoDentalDTO historicoDentalDTO){
-        HistoricoDentalDTO historico = historicoDentalService.salvarHistoricoDental(historicoDentalDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(historico);
-    }
+    @Autowired
+    private ProcedimentoDentarioRepository procedimentoDentarioRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    // Página inicial: lista todos os históricos dentários
     @GetMapping
-    public ResponseEntity<List<HistoricoDentalDTO>> listarHistoricos () {
-        List<HistoricoDentalDTO> historicos = historicoDentalService.listarHistoricoDental();
-        List<HistoricoDentalDTO> historicosComLinks = historicos.stream().map(historico -> {
-            historico.add(linkTo(methodOn(HistoricoDentalController.class).obterHistoricoDental(historico.getId())).withSelfRel());
-            return historico;
-        }).collect(Collectors.toList());
-        return ResponseEntity.ok(historicosComLinks);
+    public String listarHistoricoDental(Model model) {
+        List<HistoricoDentalDTO> historicoDentalList = historicoDentalService.listarHistoricoDental();
+        model.addAttribute("historicoDentalList", historicoDentalList);
+        return "historicos-dentais";
     }
 
+    // Página para adicionar um novo histórico dental
+    @GetMapping("/novo")
+    public String mostrarFormularioDeCadastro(Model model) {
+        List<ProcedimentoDentario> procedimentos = procedimentoDentarioRepository.findAll();
+        List<Usuario> usuarios =  usuarioRepository.findAll();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("historicoDentalDTO", new AdicionarHistoricoDentalDTO());
+        model.addAttribute("procedimentos",procedimentos);
+        return "formulario-historico-dental";
+    }
+
+    @PostMapping("/novo")
+    public String salvarHistoricoDental(@Valid @ModelAttribute("historicoDentalDTO") AdicionarHistoricoDentalDTO historicoDentalDTO,
+                                        BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "formulario-historico-dental";
+        } else {
+            HistoricoDentalDTO historicoSalvo = historicoDentalService.salvarHistoricoDental(historicoDentalDTO);
+            model.addAttribute("historicoSalvo", historicoSalvo);
+            return "redirect:/historico";
+        }
+
+    }
+
+    // Página para visualizar um histórico dental
     @GetMapping("/{id}")
-    public ResponseEntity<HistoricoDentalDTO> obterHistoricoDental (@PathVariable Integer id) {
-        HistoricoDental historico = historicoDentalService.lerHistoricoDental(id);
-        historico.add(linkTo(methodOn(HistoricoDentalController.class).listarHistoricos()).withRel("Lista de Históricos"));
-        return ResponseEntity.ok(HistoricoDentalMapper.toDTO(historico));
+    public String visualizarHistoricoDental(@PathVariable("id") Integer id, Model model) {
+        try {
+            HistoricoDentalDTO historicoDentalDTO = historicoDentalService.lerHistoricoDental(id);
+            model.addAttribute("historicoDentalDTO", historicoDentalDTO);
+            return "detalhes-historico-dental";
+        } catch (HistoricoDentalNotFoundException e) {
+            model.addAttribute("error", "Histórico Dental não encontrado.");
+            return "error";
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarHistoricoDental(@PathVariable Integer id){
+    // Página para excluir um histórico dental
+    @GetMapping("/deletar/{id}")
+    public String deletarHistoricoDental(@PathVariable("id") Integer id) {
         historicoDentalService.deletarHistoricoDental(id);
-        return ResponseEntity.noContent().build();
+        return "redirect:/historico";
     }
 }

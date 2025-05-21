@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Análise Dentária</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Cadastro de Nova Análise Dentária</h1>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/analises-dentarias}" th:object="${analiseDentaria}" method="post">
+
+                <!-- Campo Usuário -->
+                <div class="form-group">
+                    <label for="usuarioId">Usuário</label>
+                    <select id="usuarioId" th:field="*{usuarioId}" class="form-control" required>
+                        <option th:each="usuario : ${usuarios}"
+                                th:value="${usuario.id}"
+                                th:text="${usuario.nome}">Escolha o Usuário</option>
+                    </select>
+                </div>
+
+                <!-- Campo Probabilidade de Problema -->
+                <div class="form-group">
+                    <label for="probabilidadeProblema">Probabilidade do Problema (%)</label>
+                    <input type="number" id="probabilidadeProblema" th:field="*{probabilidadeProblema}" class="form-control" step="0.01" min="0" max="100" required />
+                    <small class="form-text text-muted">Insira um valor de 0 a 100</small>
+                </div>
+
+                <!-- Campo Dados de Monitoramento -->
+                <div class="form-group">
+                    <label>Dados de Monitoramento</label>
+                    <div th:each="dado : ${dadosMonitoramento}">
+                        <div class="form-check">
+                            <input type="checkbox" th:field="*{dadosMonitoramentoIds}" th:value="${dado.id}" class="form-check-input" />
+                            <label class="form-check-label" th:text="${dado.dataRegistro}"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Cadastrar Análise Dentária</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link para voltar -->
+    <br>
+    <a href="/analises-dentarias" class="btn btn-secondary">Voltar para a lista de análises dentárias</a>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

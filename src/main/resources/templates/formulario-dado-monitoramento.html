@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Dado de Monitoramento</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Adicionar Dado de Monitoramento</h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/dados-monitoramento/salvar}" th:object="${dadoMonitoramento}" method="post">
+
+                <!-- Campo ID do Usuário -->
+                <div class="form-group">
+                    <label for="usuarioId">ID do Usuário:</label>
+                    <input type="number" id="usuarioId" th:field="*{usuarioId}" class="form-control" required />
+                </div>
+
+                <!-- Informações sobre relatos -->
+                <div class="form-group">
+                    <br>
+                    <p class="text-muted">Os relatos de problemas dentários devem ser adicionados em: <a href="http://localhost:8080/relatos-problema-dentario" target="_blank">http://localhost:8080/relatos-problema-dentario</a></p>
+                </div>
+
+                <!-- Botão de Salvar -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link para voltar -->
+    <br>
+    <a href="/dados-monitoramento" class="btn btn-secondary">Voltar</a>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

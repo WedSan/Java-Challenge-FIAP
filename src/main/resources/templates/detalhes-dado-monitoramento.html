@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalhes do Dado de Monitoramento</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS (se necessário) -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 class="h4">Detalhes do Dado de Monitoramento</h2>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">ID do Dado de Monitoramento:</dt>
+                <dd class="col-sm-9" th:text="${dadoMonitoramento.id}"></dd>
+
+                <dt class="col-sm-3">ID do Usuário:</dt>
+                <dd class="col-sm-9" th:text="${dadoMonitoramento.usuario.id}"></dd>
+
+                <dt class="col-sm-3">Usuário:</dt>
+                <dd class="col-sm-9" th:text="${dadoMonitoramento.usuario.nome}"></dd>
+
+                <dt class="col-sm-3">Data de Registro:</dt>
+                <dd class="col-sm-9" th:text="${#temporals.format(dadoMonitoramento.dataRegistro, 'dd/MM/yyyy HH:mm')}"></dd>
+            </dl>
+
+            <h3 class="mt-4">Relatos de Problemas Dentários</h3>
+            <ul class="list-group">
+                <li th:each="relato : ${dadoMonitoramento.relatosProblemasDentarios}" class="list-group-item">
+                    <span th:text="${relato.problema}"></span>
+                </li>
+            </ul>
+
+            <a href="/dados-monitoramento" class="btn btn-primary mt-3">Voltar para a Lista</a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

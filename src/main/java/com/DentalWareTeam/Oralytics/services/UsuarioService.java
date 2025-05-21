@@ -3,50 +3,61 @@ package com.DentalWareTeam.Oralytics.services;
 import com.DentalWareTeam.Oralytics.dto.ListagemUsuarioDTO;
 import com.DentalWareTeam.Oralytics.dto.UsuarioDTO;
 import com.DentalWareTeam.Oralytics.exceptions.UsuarioNotFoundException;
+import com.DentalWareTeam.Oralytics.infra.config.RabbitConfig;
+import com.DentalWareTeam.Oralytics.mapper.UsuarioMapper;
 import com.DentalWareTeam.Oralytics.model.Usuario;
 import com.DentalWareTeam.Oralytics.repositories.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UsuarioService {
+@Transactional
+public class UsuarioService implements UserDetailsService {
 
-    @Autowired
+
     private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final RabbitTemplate rabbitTemplate;
+
+    private final ModelMapper modelMapper;
+
+    private final LogCadastroService logCadastroService;
+
+    private final PasswordEncoder passwordEncoder;
 
 
-    public UsuarioService(UsuarioRepository usuarioRepository, ModelMapper modelMapper) {
+    public UsuarioService(UsuarioRepository usuarioRepository, RabbitTemplate rabbitTemplate, ModelMapper modelMapper, LogCadastroService logCadastroService, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.rabbitTemplate = rabbitTemplate;
         this.modelMapper = modelMapper;
-    }
-
-    private UsuarioDTO convertToDTO(Usuario usuario) {
-        return modelMapper.map(usuario, UsuarioDTO.class);
+        this.logCadastroService = logCadastroService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     private ListagemUsuarioDTO convertToListagemUsarioDTO (Usuario usuario) {
         return modelMapper.map(usuario, ListagemUsuarioDTO.class);
     }
 
-    private Usuario convertToEntity(UsuarioDTO usuarioDTO) {
-        return modelMapper.map(usuarioDTO, Usuario.class);
-    }
 
     @Transactional
     public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
-        Usuario usuario = convertToEntity(usuarioDTO);
+        Usuario usuario = UsuarioMapper.toEntity(usuarioDTO);
+        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
-        return convertToDTO(usuarioSalvo);
+        rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_NAME,RabbitConfig.ROUTING_KEY,usuarioDTO);
+        return UsuarioMapper.toDTO(usuarioSalvo);
     }
 
     @Transactional
@@ -84,9 +95,17 @@ public class UsuarioService {
     @Transactional
     public Usuario atualizarSenha (Integer id, String senha) throws UsuarioNotFoundException {
         Usuario usuario = lerUsuario(id);
-        usuario.setSenha(senha);
+        usuario.setSenha(passwordEncoder.encode(senha));
         usuarioRepository.save(usuario);
         return usuario;
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o e-mail: " + email));
+        return new User(usuario.getUsername(), usuario.getPassword(), true,true,true,true, usuario.getAuthorities());
+    }
+
 
 }

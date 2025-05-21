@@ -1,6 +1,5 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import com.DentalWareTeam.Oralytics.dto.AnaliseDentariaDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;

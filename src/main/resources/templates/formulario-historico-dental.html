@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Histórico Dental</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h1 class="h4">Cadastrar Novo Histórico Dental</h1>
+        </div>
+        <div class="card-body">
+            <form action="/historico/novo" method="post" th:object="${historicoDentalDTO}">
+
+                <!-- Campo Condição do Dente -->
+                <div class="form-group">
+                    <label for="condicaoDente">Condição do Dente:</label>
+                    <input type="text" id="condicaoDente" th:field="*{condicaoDente}" class="form-control" required>
+                </div>
+
+                <!-- Campo Data da Consulta -->
+                <div class="form-group">
+                    <label for="dataConsulta">Data da Consulta:</label>
+                    <input type="date" id="dataConsulta" th:field="*{dataConsulta}" class="form-control" required>
+                </div>
+
+                <!-- Campo Usuário -->
+                <div class="form-group">
+                    <label for="usuario">Usuário:</label>
+                    <select id="usuario" th:field="*{usuarioId}" class="form-control" required>
+                        <option value="" disabled selected>Selecione um usuário</option>
+                        <option th:each="usuario : ${usuarios}"
+                                th:value="${usuario.id}"
+                                th:text="${usuario.nome}"></option>
+                    </select>
+                </div>
+
+                <!-- Botão de Submissão -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link para voltar -->
+    <br>
+    <a href="/historico" class="btn btn-secondary">Voltar para a lista de históricos</a>
+</div>
+
+<!-- Bootstrap JS e Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

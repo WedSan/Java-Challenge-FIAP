@@ -1,12 +1,8 @@
 package com.DentalWareTeam.Oralytics.model;
 
-import com.DentalWareTeam.Oralytics.dto.HistoricoDentalDTO;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.hateoas.RepresentationModel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -53,7 +49,6 @@ public class HistoricoDental extends RepresentationModel<HistoricoDental> {
     }
 
     public void setProcedimentosDentarios(Set<ProcedimentoDentario> procedimentosDentarios) {
-        procedimentosDentarios.forEach(e -> e.setHistoricoDental(this));
         this.procedimentosDentarios = procedimentosDentarios;
     }
 

@@ -1,17 +1,15 @@
 package com.DentalWareTeam.Oralytics.dto;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.hateoas.RepresentationModel;
 
-public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
+public class UsuarioDTO {
 
     private int id;
 
     @NotBlank(message = "O campo de nome não pode ser nulo")
-    private String name;
+    private String nome;
 
     @Email
     @NotBlank(message = "O campo de email não pode ser nulo")
@@ -22,18 +20,21 @@ public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
     private String senha;
 
     @NotNull(message = "O campo de genero não pode ser nulo")
-    private char genero;
+    private String genero;
+
+    private String role;
 
     public UsuarioDTO() {
 
     }
 
-    public UsuarioDTO(int id, String name, String email, String senha, char genero) {
+    public UsuarioDTO(int id, String nome, String email, String senha, String genero, String role) {
         this.id = id;
-        this.name = name;
+        this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.genero = genero;
+        this.role = role;
     }
 
     public int getId() {
@@ -44,35 +45,43 @@ public class UsuarioDTO extends RepresentationModel<UsuarioDTO> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public @NotBlank(message = "O campo de nome não pode ser nulo") String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(@NotBlank(message = "O campo de nome não pode ser nulo") String nome) {
+        this.nome = nome;
     }
 
-    public String getEmail() {
+    public @Email @NotBlank(message = "O campo de email não pode ser nulo") String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@Email @NotBlank(message = "O campo de email não pode ser nulo") String email) {
         this.email = email;
     }
 
-    public String getSenha() {
+    public @NotBlank(message = "O campo de senha não pode ser nulo") String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(@NotBlank(message = "O campo de senha não pode ser nulo") String senha) {
         this.senha = senha;
     }
 
-    public char getGenero() {
+    public @NotNull(message = "O campo de genero não pode ser nulo") String getGenero() {
         return genero;
     }
 
-    public void setGenero(char genero) {
+    public void setGenero(@NotNull(message = "O campo de genero não pode ser nulo") String genero) {
         this.genero = genero;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
